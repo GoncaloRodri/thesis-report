@@ -8,925 +8,196 @@
 
 \typeout{NT FILE chapter2.tex}%
 
-\chapter{NOVAthesis Template \emph{User's Manual}}
-\label{cha:users_manual}
-
-\glsresetall
-
-\begin{center}
-  \fbox{\LARGE
-    This manual is outdated and must be revised!}
-\end{center}
-
-
-\section{Introduction}
-\label{sec:introduction}
-
-This Chapter describes how to use the \gls{novathesis}\ template.  It is assumed that you have a working \index{installation} of \LaTeX, either local (in your own computer) or remote (in \Overleaf), and that you were able to generate a PDF for the default configuration of the template: a PhD thesis for \gls{FCT}.
-
-
-\section{Quick Start}
-\label{sec:quick_started}
-
-\subsection{With a Local \LaTeX\ Installation} % (fold)
-\label{sub:with_a_local_latex_installation}
-
-Follow these steps to get started with a local \LaTeX\ installation:
-
-\begin{enumerate}
-  \item Download \LaTeX.  There are two major \LaTeX\ distributions — \href{https://miktex.org/}{\MikTeX} and \href{https://www.tug.org/texlive/}{\TeXLive} — that share lots of similarity, and \LaTeX\ documents are portable between them. This means that, for most users, both systems are equally usable.
-  \begin{description}
-    \item [\TeX-Live] is maintained by (La)\TeX\ developers and is certainly the best distribution you may install in your computer:  However, the default distribution will take more than 5\,GB on your hard disk… so, if you are not short on disk space, install \TeXLive!
-    \item[Mik\TeX] will, by default, install only a minimal set of packages. The extra/additional packages will be installed on the fly.  Installing packages on the fly is useful if disk space is limited, but has its own caveats in the longer term.  Definitely choose \MikTeX\ if you're short on disk space.
-  \end{description}
-  Which one to download?  There are \href{https://tex.stackexchange.com/questions/20036/what-are-the-advantages-of-tex-live-over-miktex}{pros and cons for both distributions} so it is essentially a question of where does your heart fall first!  Mine falls to \TeXLive, but yours can fall elsewhere!  \emojiSmile
-  \item Install \LaTeX. Installation of \LaTeX\ is as hard as installing any other software.  Just do your best and you will certainly succeed. 
-  \item Update your \LaTeX\ installation using the \emph{\TeXLive Utility} program of the \MikTeX\ console.
-  \item Download the \gls{novathesis} template by either:
-  \begin{itemize}
-    \item Cloning the \href{https://github.com/joaomlourenco/novathesis}{GitHub repository} with
-    \begin{verbatim}    git clone --depth=1 https://github.com/joaomlourenco/novathesis.git\end{verbatim}
-    or
-    \item Downloading the \href{https://github.com/joaomlourenco/novathesis/archive/main.zip}{latest version from the GitHub repository as a Zip file}.
-  \end{itemize}
-
-  \item \label{it:project_available} Download additional School specific files if applicable:
-  \begin{description}
-    \item[Universidade do Minho (UMINHO)] download the required \emph{NewsGotT} font files from
-    \url{https://github.com/joaomlourenco/novathesis-extras/raw/main/Fonts/NewsGotT.zip}\\
-    then unzip the file and copy the~3~font files
-\begin{flushleft}
-\hspace*{0.5cm}“\verb!n015002t.ttf!”, “\verb!n015003t.ttf!”, and “\verb!n015006t.ttf!”
-\end{flushleft}
-    to the folder
-\begin{flushleft}
-\hspace*{0.5cm}“\verb!NOVAthesisFiles/FontStyles/Fonts!”.
-\end{flushleft}
-    \item[Escola Superior de Enfermagem do Porto (ESEP)] download the required \emph{Calibri} font files from
-    \url{https://github.com/joaomlourenco/novathesis-extras/raw/main/Fonts/Calibri.zip}\\
-    then unzip the file and copy the~4~font files
-\begin{flushleft}
-\hspace*{0.5cm}“\verb!Calibri.ttf!”, “\verb!Calibrib.ttf!”, “\verb!Calibrii.ttf!”, and “\verb!Calibriz.ttf!”
-\end{flushleft}
-      \noindent to the folder
-\begin{flushleft}
-\hspace*{0.5cm}\verb!NOVAthesisFiles/FontStyles/Fonts!.
-\end{flushleft}
-  \end{description}
-
-  \item Compile the document with you favorite LaTeX processor (pdfLaTeX, XeLaTeX or LuaLaTeX).
-  \begin{itemize}
-    \item The main file is named “\verb!template.tex!”, but you are free to rename it as you please.
-    \item Either load the main file in your favorite \href{https://en.wikipedia.org/wiki/Comparison_of_TeX_editors}{LaTeX text editor} and press the appropriate (\emph{magic}) button to generate a PDF file, or open a terminal and compile it with “\verb!latexmk -pdf template!”. If you use a \LaTeX\ text editor, please notice that the \gls{novathesis} template uses “\verb!biber!” and not “\verb!bibtex!” to process the bibliography, which means that most probably you have to open the \emph{Editor Preferences} and somewhere (depending on the Editor you are using) change “\verb!bibtex!” to “\verb!biber!”.
-    \item Notice that, due to the external font sets used, \pdfLaTeX\ will not work for both \textbf{UMINHO} and \textbf{ESEP}, and you have to use either \XeLaTeX\ (“\verb!latexmk -pdfxe template!”) or \LuaLaTeX (“\verb!latexmk -pdflua template!”).
-  \end{itemize}
-  \item Edit the files in the “\texttt{Config}” folder.  See \autoref{tab:configuration_files}.
-  \item Recompile de document.
-  \item And you're done with a beautifully formatted thesis/dissertation! {\setlength{\twemojiDefaultHeight}{1.5\twemojiDefaultHeight}\emojiSmile}
-\end{enumerate}
-
-% subsection with_a_local_latex_installation (end)
-
-\subsection{With a Remote Cloud-based Service} % (fold)
-\label{sub:with_a_remote_cloud_based_service}
-
-Follow these steps to get started with a remote \LaTeX\ installation:
-
-\begin{itemize}
-  \item Download the \href{https://github.com/joaomlourenco/novathesis/archive/main.zip}{latest version from the GitHub repository as a Zip file}.
-  \item Login to your favorite LaTeX cloud service. I recommend \href{https://www.overleaf.com/?r=f5160636&rm=d&rs=b}{Overleaf} but there are alternatives. These instructions apply to Overleaf and you'll have to adapt for other providers.
-  \item In the menu select \fbox{New project}$\rightarrow$\fbox{Upload project}.
-  \item Select “\verb!template.tex!” as the main file.
-  \item Follow from Step~\ref{it:project_available} above in Section~\ref{sub:with_a_local_latex_installation} (\nameref{sub:with_a_local_latex_installation}).
-\end{itemize}
-
-% subsection with_a_remote_cloud_based_service (end)
-
-
-\section{Folder and Files}
-\label{sec:folders_and_files}
-
-The \gls{novathesis} template is organized into many files and folders. At the main level it includes the following files and folders listed in Table~\ref{tab:folders_and_files}.
-
-\newcommand{\accessAllowed}{\includegraphics[align=c,width=1.9em]{access_allowed}}
-\newcommand{\accessForbiden}{\includegraphics[align=c,width=1.9em]{dont_touch}}
-\newcommand{\File}{\includegraphics[align=c,width=1.9em]{file}}
-\newcommand{\Folder}{\includegraphics[align=c,width=1.9em]{folder}}
-
-
-\bgroup
-    \rowcolors{1}{}{GhostWhite}
-      \begin{xltabular}{\textwidth}{>{\ttfamily}l>{\itshape}lcX}
-        \caption{The folders and files (top level).}
-        \label{tab:folders_and_files}\\
-        \toprule
-        \rowcolor{Gainsboro}%
-        Name & Type & Access & Contents \\
-        \midrule
-template.tex      & \File    & \accessForbiden &
-The main template file. You need to \emph{compile} this file with one of \pdfLaTeX, \XeLaTeX, or \LuaLaTeX\ to obtain the PDF file (”\texttt{template.pdf}”).  I recommend the usage of the ”\texttt{latexmk}” command or, if you use a UN*X-like OS, you may use ”\texttt{make}” (and the ggiven ”\texttt{Makefile}”).
-\\
-Config          & \Folder  & \accessAllowed &
-Configuration files.  Please customize your template by changing the files in this folder!
-\\
-Chapters          & \Folder  & \accessAllowed &
-Examples of document contents, including Chapters, Appendices, Annexes, Abstracts, Glossaries, Lists of Symbols, etc. Replace them with your own.
-\\
-Bibliography      & \Folder    & \accessAllowed &
-Where all your bibliography files should be located. You may have has many bibliography files as you want.
-\\
-template.pdf      & \File    & \accessAllowed &
-A possible result of applying \pdfLaTeX\ to the “\texttt{template.tex}” file. The look and feel of the document will depend on the parametriza\-tion/\-con\-fig\-u\-ra\-tion (e.g., School) of this template.
-\\
-novathesis.cls     & \File    & \accessForbiden &
-The main class file.
-\\
-NOVAthesisFiles   & \Folder  & \accessForbiden &
-Additional files for the \gls{novathesis} template.  This is where all the juice is so, unless you are a \TeX magician, don't mess up with the files and folders inside this folder.
-\\
-        \bottomrule
-        \end{xltabular}
-    % \end{longtblr}
-\egroup
-
-\bgroup
-    \rowcolors{1}{}{GhostWhite}
-      \begin{xltabular}{\textwidth}{>{\ttfamily}l>{\itshape}lcX}
-        \caption{The configuration files (\texttt{Config} folder).}
-        \label{tab:configuration_files}\\
-        \toprule
-        \rowcolor{Gainsboro}%
-        Name & Type & Access & Contents \\
-        \midrule
-\texttt{0\_memoir.tex}      & \File  & \accessForbiden &
-Options specific for the \texttt{memoir} class. \emph{Don't touch this file unless you know what you are doing!}
-\\
-\texttt{1\_novathesis.tex}  & \File  & \accessAllowed &
-The main configuration file for the template, e.g., select the document type, the school, the used languages, etc.  
-\\
-\texttt{2\_biblatex.tex}      & \File  & \accessAllowed &
-Select how your citations and bibliographic references will be printed.  The default is numbers inside square brackets, e.g. \cite{novathesis-manual}, but you can change it to other formats, such as author-year, e.g., \citeauthor{novathesis-manual}~(\citeyear{novathesis-manual}).
-\\
-\texttt{3\_cover.tex}		& \File & \accessAllowed & 
-Configure cover contents (e.g., author's name, thesis/dissertation title, author, advisers, committee, etc)
-\\
-\texttt{4\_files.tex}		& \File & \accessAllowed & 
-Select which files shall be included in the document as chapters, appendices, annexes, etc…
-\\
-\texttt{5\_packages.tex}		& \File & \accessAllowed & 
-User's customization, such as loading additional packages and declare user defined commands.
-\\
-\texttt{6\_list\_of.tex}		& \File & \accessForbiden & 
-Configure the lists to be printed (table of contents, list of figures, list of tables, list of listings, etc). \emph{Don't touch this file unless you know what you are doing!}
-\\
-\texttt{9\_nova\_fct.tex}	& \File & \accessAllowed & 
-Configurations specific to NOVA FCT. \emph{Otherwise ignored.}
-\\
-\texttt{9\_ulisboa\_fmv.tex}	& \File & \accessAllowed & 
-Configurations specific to ULISBOA FMV. \emph{Otherwise ignored.}
-\\
-\texttt{9\_ulisboa\_ist.tex}	& \File & \accessAllowed & 
-Configurations specific to ULISBOA IST. \emph{Otherwise ignored.}
-\\
-\texttt{9\_uminho.tex}		& \File & \accessAllowed & 
-Configurations specific to UMINHO (all schools). \emph{Otherwise ignored.}
-\\
-        \bottomrule
-        \end{xltabular}
-    % \end{longtblr}
-\egroup
-
-
-% section folder_structure (end)
-
-% ===================
-% = Package options =
-% ===================
-\section{Customizing the \novathesistxt\ template}
-\label{sec:package_options}
-
-The \novathesistxt\ template can be customized by editing the files in the \texttt{Config} folder.
-
-\newcommand{\classoption}[4]{\textbf{#1=OPT}\newline\emph{\small#2}&\textbf{#3}\newline{\small#4}\\}
-\newcommand{\defaultopt}[1]{\mbox{$\Rightarrow$~\emph{Default: \texttt{#1}}}\newline}
-\newcommand{\defaultit}[1][default]{($\Leftarrow$~\emph{#1})}
-
-
-\subsection{Options in \texttt{1\_novathesis.tex}} % (fold)
-\label{sub:_texttt_1__novathesis_tex}
-
-\subsubsection{Most Relevant Options (\texttt{1\_novathesis.tex})} % (fold)
-\label{ssub:most_relevant_options}
-
-\bgroup
-\begin{xltabular}{\linewidth}{>{\hsize=.4\hsize\raggedright\arraybackslash}X>{\hsize=.6\hsize}X}
-  \toprule
-%----------------------------------------------------------------------
-  \classoption{doctype}%
-    {phd, phdprop, phdplan, msc, mscplan, bsc, plain}%
-    {The type of the document.}%
-	{%
-    \begin{tabular}{@{}r@{ $\rightarrow$ }l@{}}
-        phd & PhD thesis \defaultit.\\
-    phdprop & PhD thesis proposal (for FCT-NOVA).\\
-    phdplan & PhD thesis plan.\\
-        msc & MSc thesis.\\
-    mscplan & MSc thesis plan.\\
-        bsc & BSc report.\\
-      plain & Other report.\\
-    \end{tabular}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{school}%
-  	{nova/fct, nova/fcsh, nova/ims, nova/ims/mcsig, nova/ims/mgt, nova/ensp, nova/itqb/green, nova/itqb/gray,
-ulisboa/ist, ulisboa/fc, ulisboa/fmv,
-uminho/eaad, uminho/ec, uminho/ed, uminho/eeg, uminho/eeng, uminho/elach, uminho/emed, uminho/epsi, uminho/ese, uminho/i3bs, uminho/ics, uminho/ie, 
-iscteiul/eta, 
-ips/ests, 
-ipl/isel, ipl/isel/meb,
-ulht/deisi, ulht/mge, 
-other/esep
-	}%
-    {Selection of the university and of the school (and degree variant).}%
-    {\defaultopt{school=nova/fct} 
-     This option changes the typesetting of the de document to some specific School formating and layout, like covers, margins, fonts, paragraph spacing and indentation, etc.}
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{docstatus}%
-    {draft, provisional, final}%
-    {The current status of the document.}%
-	{%
-    \begin{tabular}{@{}r@{ $\rightarrow$ }X@{}}
-         working      & Working version \defaultit.\\
-         provisional  & Version for submission.\\
-         final        & Final version.\\
-    \end{tabular}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{lang}%
-    {en, pt, de, es, fr, gr, it}%
-    {The main language for the document.}%
-	{%
-    \begin{tabular}{@{}l@{ $\rightarrow$ }X@{}}
-         en & Enlgish \defaultit.\\
-         pt & Portuguese.\\
-         de & German.\\
-         es & Spanish.\\
-         fr & French.\\
-         gr & Greek.\\
-         it & Italian.\\
-    \end{tabular}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{media}%
-    {screen, paper}%
-    {The target media for the PDF.}%
-	{%
-    \begin{tabular}{@{}l@{ $\rightarrow$ }X@{}}
-         screen & No empty/white pages \defaultit.\\
-         paper  & Empty/white pages are added when necessary.\\
-    \end{tabular}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{print/webography}%
-    {User defined title}%
-    {Generate a separate bibliography for \emph{@online} references.}%
-	{%
-		\defaultopt{print/webography=undefined} 
-		If undefined, the \emph{@online} references are list in the main bibliography.  If defined, the \emph{@online} references will be printed in a separate bibliography titled as given in the option.
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{color/links}%
-    {Color name}%
-    {The color for the hyperlinks (URLs, cross references, citations).}%
-	{%
-		\defaultopt{color/links=DarkBlue} 
-		The valid color names as listed in “\texttt{xcolor}” manual, the “\texttt{svgname}” color set.
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{color/gls}%
-    {Color name}%
-    {The color for the glossary managed hyperlinks (glossary, symbols, etc).}%
-	{%
-		\defaultopt{color/gls=Black} 
-		The valid color names as listed in “\texttt{xcolor}” manual, the “\texttt{svgname}” color set.
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{print/index}%
-    {true,\newline false \defaultit}%
-    {Print the (words) index at the end of the document.}%
-	{%
-		Print the index (in Portuguese \emph{Índice Remissivo}).
-    }
-%----------------------------------------------------------------------
-    \bottomrule
-\end{xltabular}
-\egroup
-
-
-\subsubsection{Less Relevant Options (\texttt{1\_novathesis.tex})} % (fold)
-\label{ssub:less_relevant_options_1}
-
-
-\bgroup
-\begin{xltabular}{\linewidth}{>{\hsize=.4\hsize\raggedright\arraybackslash}X>{\hsize=.6\hsize}X}
-  \toprule
-%----------------------------------------------------------------------
-	  \classoption{abstractorder}%
-	    {$L_0 = \{L_1, L_2, …, L_n\}$}%
-	    {Forces the abstracts languages and order for documents in language $L_0$.}%
-		{%
-		\defaultopt{abstractorder=\{en=\{en,pt\}\} for english}
-		\defaultopt{abstractorder=\{L=\{L,en\}\} for lang L}
-		$L_i$ is a two-letters language code from the set of valid language codes, following ISO 3166-1 (alfa-2).
-	    }
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{lang/extra}%
-	    {$\{L_1, L_2, …, L_n\}$}%
-	    {List of additional languages are used in the document besides the main laguage and those used in the abstracts (above).}%
-		{%
-		\defaultopt{lang/extra=\{\}}
-		$L_i$ is a two-letters language code from the set of valid language codes, following ISO 3166-1 (alfa-2).
-	    }
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{gnumberlist}%
-  	  	{true, \defaultit\newline false}%
-	    {Shall the glossary entries list the page numbers where those entries are used?  (Like a reverse index!)}%
-		{}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{numberallpages}%
-  	  	{true,\newline false \defaultit}%
-	    {Shall all the pages (except cover) be numbered?}%
-		{}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{tocintoc}%
-  	  	{true,\newline false \defaultit}%
-	    {Shall table of contents be listed in the table of contents?}%
-		{}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{tocintoc}%
-  	  	{true,\newline false \defaultit}%
-	    {Shall a second cover page be forced?}%
-		{If the contents for the second page are not defined, the second cover will be a replica of the first cover.}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{print/committee}%
-  	  	{true,\newline false}%
-	    {Shall the evaluation committee be printed?}%
-		{%
-		\defaultopt{print/committee=true if docstatus=final}
-		\defaultopt{print/committee=false otherwise}
-	    }
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{print/frontmatter}%
-  	  	{true, \defaultit\newline false}%
-	    {Shall the front matter be printed?}%
-		{Set to false to generate a PDF with only the cover and the book chapters.}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{print/statement}%
-  	  	{true,\newline false \defaultit}%
-	    {Shall the honor/originality statement be printed?}%
-		{}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{print/copyright}%
-  	  	{true, \defaultit\newline false}%
-	    {Shall the copyright message be printed?}%
-		{}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{print/timestamp}%
-  	  	{true,\newline false}%
-	    {Shall a timestamp (with the PDF generation date/time) be printed in the cover?}%
-		{%
-		\defaultopt{print/timestamp=true if docstatus=working}
-		\defaultopt{print/timestamp=false otherwise}
-		}
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{style/url}%
-  	  	{default, \defaultit\newline same}%
-	    {Use the same (main) font in URLs?}%
-		{}
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{style/font}%
-    {arial, bookman, calibri, erewhon, kieranhealy, kpfonts, libertine, newpx, newsgott, scholax}%
-    {Which font set to use in the document?}%
-	{%
-    \begin{tabular}{@{}l@{ $\rightarrow$ }X@{}}
-		arial 		& Use `arial' font. Requires Xe\LaTeX\ or Lua\LaTeX.\\
-		bookman 	& Use `bookman' font.\\
-		calibri 	& Use `calibri' font. Requires Xe\LaTeX\ or Lua\LaTeX.\\
-		erewhon 	& Use `erewhon' font.\\
-		kieranhealy & Use `kieranhealy' font.\\
-		kpfonts 	& Use `palatino' font.\\
-		libertine 	& Use `libertine' font.\\
-		newpx 		& Use `palatino' font. \defaultit\\
-		newsgott 	& Use `newsgott' font. Requires Xe\LaTeX\ or Lua\LaTeX.\\
-		scholax 	& Use `scholax' font.\\
-    \end{tabular}
-    }
-%----------------------------------------------------------------------
-	    \midrule
-	  \classoption{style/chapter}%
-	    {\emph{See list on the side!}}%
-	    {Which chapter style to use in the document?}%
-	{%
-	Besides the standard \href{https://tug.ctan.org/info/MemoirChapStyles/MemoirChapStyles.pdf}{\texttt{memoir} chapter styles} (\texttt{default}, \texttt{section}, \texttt{article}, \texttt{reparticle}, \texttt{hangnum}, \texttt{companion}, \texttt{demo}, \texttt{bianchi}, \texttt{bringhurst}, \texttt{brotherton}, \texttt{chappell}, \texttt{culver}, \texttt{dash}, \texttt{demodemoell}, \texttt{ger}, \texttt{lyhne}, \texttt{madsen}, \texttt{pedersen}, \texttt{southall}, \texttt{thatcher}, \texttt{veelo}, \texttt{verville}, \texttt{crosshead}, \texttt{dowding}, \texttt{komalike}, \texttt{ntglike}, \texttt{tandh}, \texttt{wilsondob}), the customized list of chapter styles below is also available.
-	    \begin{tabular}{@{}l@{ $\rightarrow$ }X@{}}
-		bar 		& Use `bar' chapter style. \defaultit\\
-		bar-compact	& Use `bar-compact' chapter style.\\
-		bluebox 	& Use `bluebox' chapter style.\\
-		compact 	& Use `compact' chapter style.\\
-		elegant 	& Use `elegant' chapter style.\\
-		fmv 		& Use `fmv' chapter style.\\
-		hansen 		& Use `hansen' chapter style.\\
-		ist 		& Use `ist' chapter style.\\
-		ist2 		& Use `ist2' chapter style.\\
-		pedersen 	& Use `pedersen' chapter style.\\
-	    \end{tabular}
-	    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{lang/cover}%
-    {en, pt, de, es, fr, gr, it}%
-    {The main language for the cover.}%
-	{%
-	\defaultopt{The same as the main language.}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{lang/copyright}%
-    {en, pt, de, es, fr, gr, it}%
-    {The main language for the copyright message.}%
-	{%
-	\defaultopt{The same as the main language.}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{spine/layout}%
-    {no, full, trim}%
-    {Print the “book spine” at the end of the document?}%
-	{%
-		\defaultopt{`trim' if docstatus=final}
-		\defaultopt{`no' otherwise}
-	    \begin{tabular}{@{}l@{ $\rightarrow$ }X@{}}
-		no 		& do not print the book spine.\\
-		full	& print the book spine in a full page.\\
-		trim 	& print and trim the page to the width of the book spine.\\
-	    \end{tabular}
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{spine/width}%
-    {\emph{\LaTeX\ dimension}}%
-    {Force the width of the “book spine”.}%
-	{%
-		\defaultopt{The “natural width”.}
-		 The defailt width for the book spine will be the width of the number of pages of the document if printed in standard paper ($80g/m^2$).
-    }
-%----------------------------------------------------------------------
-    \midrule
-  \classoption{debug}%
-    {cover, spine}%
-    {Activate debug mode for cover and/or book spine.}%
-	{%
-		\defaultopt{debug=\{\}}
-    }
-% %----------------------------------------------------------------------
-	  %   \midrule
-	  % \classoption{linkscolor}%
-	  %   {A color of your choice.}%
-	  %   {The color for all the hyperlinks in the PDF file.}%
-	  %   {\defaultopt{darkblue}
-	  %    The “\texttt{media=paper}” option (see below) will override this option to “\texttt{black}”}
-% %----------------------------------------------------------------------
-%     \midrule
-%   \classoption{media}%
-%     {screen, paper}%
-%     {The target of the PDF.}%
-%     {\defaultopt{screen}
-%      By default, PDF for screen has colored links and identical left and right margins, while PDF for paper (to print) has black links and may have different left and right margins.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{print/index}%
-%     {true, false}%
-%     {Produce the document index.}%
-%     {\defaultopt{false}
-%      The index (\emph{índice remissivo}) is a keyword index typeset an the end of the document. WARNING: Should not be confused with the table of contents.}
-%     \midrule
-%
-%
-%
-%
-% %----------------------------------------------------------------------
-%   \classoption{fontstyle}%
-%     {bookman, charter, fourier, kpfonts(*), mathpazo1, mathpazo2, newcent}%
-%     {The font set to be used in the document.}{Please note that a font set include definitions for the main text, headings, maths, etc.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{chapstyle}%
-%     {bianchi, bluebox, brotherton, dash, default, elegant(*), ell, ger, hansen, ist, jenor, lyhne, madsen, pedersen, veelo, vz14, vz34, vz43}%
-%     {The chapter style}{The look of the chapter beginning.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{converlang}%
-%     {en, pt(*)}%
-%     {The language to be used when typesetting the cover page.}{}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{otherlistsat}%
-%     {front(*), back}%
-%     {Where to put the other lists besides the table of contents.}{The default is (\texttt{front}) before the main text.  But some scientific areas prefer them at the end of the document (\texttt{back}), just before the Appendixes.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{statement}%
-%     {true, false(*)}%
-%     {Include or don't include the contents of the “\texttt{statement}” file.}{The default is for this file to be ignored (if it exists).}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{spine}%
-%     {true, false(*)}%
-%     {Generate the book spine and the last page in the PDF.}{}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{biblatex}%
-%     {OPT=\{list of options for \texttt{biblatex}\}}%
-%     {Customize \texttt{biblatex}, the bibliography management system used in this class.}{Probably you will want to change the value of the \texttt{biblatex} “\texttt{style}” option. For other customizations of \texttt{biblatex} check its manual.}
-%     \midrule
-% %----------------------------------------------------------------------
-%   \classoption{memoir}%
-%     {OPT=\{list of options for \texttt{memoir}\}}%
-%     {Customize the base class \texttt{memoir}.}{The \texttt{memoir} manual should be the first document to be consulted when looking for “\textbf{how can I do this?}” You may what to change the base font size from 11pt to a smaller (10pt) or larger (12pt) size.  Also, remember to change the “\texttt{draft}” to final when your document is finished.}
-%     \midrule
-    \bottomrule
-\end{xltabular}
-\egroup
-% \end{ctabular}
-
-
-\section{How to Write Using \LaTeX}
-\label{sec:how_to_write_using_latex}
-
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \LaTeX constructs, such as Sectioning, inserting Figures and Tables, writing Equations, Theorems and algorithms, exhibit code listings, etc.
-
-% section how_to_write_using_latex (end)
-
-
-
-\section{Example glossary, acronyms, and symbols}
-%
-% \todo[inline]{A a note in a line by itself.}
-%
-This is the first occurrence of an abbreviation: \gls{abbrev}. And now the second occurrence of the same abbreviation: \gls{abbrev}. And a new acronym with capital letter: \Gls{xpt} and reused \gls{xpt}.  Let's also use a few other acronyms such as \gls{aaa}, \gls{aab}, \gls{aba}, \gls{bbb} and \gls{xpt}.
-In geometry, the area enclosed by a circle of radius \gls{r} is $\pi r^2$. Here the Greek letter \gls{pi} is equal to the ratio of the circumference of any circle to its diameter.
-Lets add ``\gls{computer}'' to the glossary! Be carefull with mathematical symbols in acronyms, please see the definition of \gls{mu}.
-
-% Reference to Potassium \gls{chem:potassio} and Sodium \gls{chem:sodio} as well.
-
-%
-% Please note that
-% \begin{center}
-%   \textbf{\large this package and template are not official for FCT/NOVA}.
-% \end{center}
-
-
-
-% \printbibliography[heading=subbibliography, segment=\therefsegment, title={\bibname\ for chapter~\thechapter}]
-
-
-\endinput
-
-%!TEX root = ../template.tex
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% chapter2.tex
-%% NOVA thesis document file
-%%
-%% Chapter with the template manual
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\typeout{NT FILE chapter2.tex}%
-
-\chapter{NOVAthesis Template \emph{User's Manual}}
-\label{cha:users_manual}
-
-\glsresetall
-
-\begin{center}
-  \fbox{\LARGE
-    This manual is outdated and must be revised!}
-\end{center}
-
-Referência ao Potássio é \gls{chem:potassio} e Sódio também \gls{chem:sodio}.
-
-\section{Introduction}
-\label{sec:introduction}
-
-This chapter describes how to use the \gls{novathesis}\ Template and the \gls{novathesisclass} file.  I will assume you have a working installation of \LaTeX, wither local (in your own computer) or remote (in Overleaf), and that it compiled successfully the default configuration (PhD for \gls{FCT}).
-
-
-\section{Folder Structure}
-\label{sec:folder_structure}
-
-The \gls{novathesis} template is organized into many files and folders. At the main level it includes the following files and folders:
-
-\noindent
-\bgroup
-\rowcolors{1}{GhostWhite}{}
-\begin{xltabular}{\linewidth}{>{\ttfamily}l>{\itshape}l>{\upshape}X}
-novathesis.cls     & file    &
-The main class file. It will include additional files from \texttt{NOVAthesisFiles} folder and its sub-folders.
-\\
-template.tex      & file    &
-The main template file. You need to \emph{compile} this file with one of pdf\LaTeX, \XeLaTeX, or \LuaLaTeX\ to obtain the \texttt{template.pdf} file.
-\\
-bibliography.bib  & file    &
-An example of a bibliography file. You may have has many as you want. \\
-template.pdf      & file    &
-A possible result of applying pdf\LaTeX\ to the \texttt{template.tex} file. The template supports multiple types of documents (e.g., MSc dissertation, PhD thesis, …) and multiple Schools (e.g., FCT-NOVA, FCSH-NOVA, IST-UL, FC-UL, …) and each will produce different results.
-\\
-Chapters          & folder  & Examples of thesis chapters. Replace them with your own chapters.
-\\
-Examples          & folder  & Some more examples of the use of the template for different document types and Schools.
-\\
-Scripts           & folder  & Some (possibly useful) scripts for Unix-based systems (Linux, Mac OSx). If you are a windows user, ignore this folder (you may safely delete it if you want).
-\\
-NOVAthesisFiles   & folder  &
-Additional files for the \gls{novathesisclass}\ file.  Unless you know what you are doing, avoid messing up with the files and folders inside this folder (except for deleting the unused Schools, see below).
-\\
-\end{xltabular}
-\egroup
-
-The \texttt{NOVAthesisFiles} folder contains additional files and folders that complement the main \gls{novathesisclass}\ file.  These are:
-
-\noindent
-\bgroup
-\rowcolors{1}{GhostWhite}{}
-\begin{tabularx}{\linewidth}{>{\ttfamily}l>{\itshape}l>{\upshape}X}
-README.txt      & file    &
-A file that should be read!  :)
-\\
-fix-babel.tex   & file    &
-Simple fixes to the \texttt{babel} package.
-\\
-lang-text.ldf   & file    &
-Translations of important strings used in the template.  Currently fully supported are Portuguese and English, but French is on the way.  If you add translations for your own language, please be so kind and send them to me. Thank you!
-\\
-options.tex     & file    &
-Processing of \gls{novathesisclass}\ options.  \emph{Don't mess with this!}
-\\
-packages.tex    & file    &
-Additional packages to be loaded into the \gls{novathesis}\ template. \emph{You should not mess with this!}
-\\
-spine.tex       & file    &
-This file is loaded only if the option \texttt{spine=full} or \texttt{spine=trim}, and includes the typesetting of the book spine.
-\\
-ChapStyles      & folder  &
-Contains a lot of files, one for each chapter style.  If you really know what you are doing, you may add your own chapter style here.
-\\
-FontStyles      & folder  &
-Contains a few files, one for each set of fonts (main text font, chapter font, section font, subsection font, etc).  If you really know what you are doing, you may add your own set here.
-\\
-Schools         & folder  &
-Configuration files for each school.  This folder is organized into subfolders, one for each university.  \emph{You may safely delete all the subfolders except the one for your University.}  Then open the subfolder of your University and \emph{you may safely delete all the subfolders except the one for your School/Faculty}.
-\\
-\end{tabularx}
-\egroup
-
-As stated above, the \texttt{Schools} folder contains per-university folders and per-school (faculty) subfolders.  Currently these are the available folders:
-
-\noindent
-\bgroup
-\rowcolors{1}{GhostWhite}{}
-\begin{tabularx}{\linewidth}{>{\ttfamily}r@{~/~}>{\ttfamily}l>{\itshape}l>{\upshape}X}
-ul     & ist    & folder  &
-The folder for the \href{http://www.tecnico.ulisboa.pt}{\emph{Instituto Superior Técnico}} of the \emph{University of Lisbon}.
-\\
-nova    & fcsh   & folder  &
-The folder for the \href{http:www.fcsh.unl.pt}{\emph{Faculty of Human and Social Sciences}}  of the \emph{NOVA University of Lisbon}.
-\\
-nova    & fct    & folder  &
-The folder for the \href{http:www.fct.unl.pt}{\emph{Faculty of Sciences and Technology}} of the \emph{NOVA University of Lisbon}.
-\\
-nova    & novaims    & folder  &
-The folder for the \href{http:www.novaims.unl.pt}{\emph{Information and Management School}} of the \emph{NOVA University of Lisbon}.
-\\
-\end{tabularx}
-\egroup
-
-% section folder_structure (end)
-
-% ===================
-% = Package options =
-% ===================
-\section{\glsfmtshort{novathesisclass}\ Class Options}
-\label{sec:package_options}
-
-The \gls{novathesisclass}\ can be customized with the options listed below.
-
-\newcommand{\classoption}[3]{\textbf{#1=OPT}\qquad #2\\\qquad\emph{#3}\\}
-
-\noindent
-\begin{ctabular}{@{}p{\linewidth}@{}}
-  \toprule
-%----------------------------------------------------------------------
-  \classoption{doctype}%
-    {phd(*), phdplan, phdprop, msc, mscplan, bsc}%
-    {The type of the document: PhD Thesis (---~Default~---), PhD Plan, PhD Proposal, MSc Dissertation, MSc Plan, BSc Report}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{school}%
-    {nova/fct(*), nova/fcsh, nova/ims, ul/ist, ul/fc}%
-    {The name of the school. This option changes the typesetting of the cover and some School specific formating, like margins, fonts, paragraph spacing and indentation, etc…}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{lang}%
-    {en(*), pt}%
-    {The main language for the document.  Currently only Portuguese and English are supported.  Other languages are expected to be support in forthcoming versions.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{fontstyle}%
-    {bookman, charter, fourier, kpfonts(*), mathpazo1, mathpazo2, newcent}%
-    {The font set to be used in the document.  Please note that a font set include definitions for the main text, headings, maths, etc.}
-    \midrule
-%----------------------------------------------------------------------
-%----------------------------------------------------------------------
-  \classoption{chapstyle}%
-    {bianchi, bluebox, brotherton, dash, default, elegant(*), ell, ger, hansen, ist, jenor, lyhne, madsen, pedersen, veelo, vz14, vz34, vz43}%
-    {The chapter style, i.e., the look of the chapter beginning.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{converlang}%
-    {en, pt(*)}%
-    {The language to be used when typesetting the cover page.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{otherlistsat}%
-    {front(*), back}%
-    {Where to put the other lists besides the table of contents. The default is (\texttt{front}) before the main text.  But some scientific areas prefer them at the end of the document (\texttt{back}), just before the Appendixes.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{statement}%
-    {true, false(*)}%
-    {Include or don't include the contents of the “\texttt{statement}” file. The default is for this file to be ignored (if it exists).}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{linkscolor}%
-    {darkblue(*), black}%
-    {The color for all the hyperlinks in the PDF file.  The “\texttt{media=paper}” option (see below) will override this option to “\texttt{black}”}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{spine}%
-    {true, false(*)}%
-    {Generate the book spine and the last page in the PDF.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{biblatex}%
-    {OPT=\{list of options for \texttt{biblatex}\}}%
-    {Customize \texttt{biblatex}, the bibliography management system used in this class. Probably you will want to change the value of the \texttt{biblatex} “\texttt{style}” option. For other customizations of \texttt{biblatex} check its manual.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{memoir}%
-    {OPT=\{list of options for \texttt{memoir}\}}%
-    {Customize the base class \texttt{memoir}. The \texttt{memoir} manual should be the first document to be consulted when looking for “\textbf{how can I do this?}” You may what to change the base font size from 11pt to a smaller (10pt) or larger (12pt) size.  Also, remember to change the “\texttt{draft}” to final when your document is finished.}
-    \midrule
-%----------------------------------------------------------------------
-  \classoption{media}%
-    {screen(*), paper}%
-    {Behavior to be customized in the school options/configuration. Expected definitions for screen are: left and right margins are equal and use colored links. Expected definitions for paper are: left and right margins are different and use black links.}
-    \bottomrule
-\end{ctabular}
-
-\section{Additional considerations about the class options}
-\label{sec:additional_considerations}
-
-In this section we will provide some additional considerations about some of the customizations available as class options.
-
-\subsection{The main language}
-\label{sub:the_main_language}
-
-The choice of the main language with the option “\texttt{lang=OPT}” affects:
-
-\begin{itemize}
-  \item \textbf{The order of the summaries.} First is printed the abstract in the main language and then in the foreign language. This means that if your main language for the document in English, you will see first the “abstract” (in English) and then the “resumo” (in Portuguese). If you switch the main language for the document for Portuguese, it will also automatically switch the order of the summaries to “resumo” and then “abstract”.
-  \item \textbf{The names for document sectioning.} E.g., ``Chapter'' vs.\ ``Capítulo'', ``Table of Contents'' vs.\ ``Índice'', ``Figure'' vs.\ ``Figura'', etc.
-  \item \textbf{The type of documents in the bibliography.} E.g., ``Technical Report'' vs.\ ``Relatório Técnico'', ``PhD Thesis'' vs.\ ``Tese de Doutoramento'', etc.
-\end{itemize}
-
-No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get Portuguese hyphenation rules in the ``Resumo'', English hyphenation rules in the ``Abstract'', and then the main language hyphenation rules for the rest of the document.
-
-% subsection the_main_language (end).
-
-% section additional_consideration (end)
-
-
-\subsection{Class of Text}
-\label{sub:class_of_text}
-
-You must choose the class of text for the document. The available options are:
-
-\begin{enumerate}
-  \item \textbf{bsc} --- BSc graduation report.
-  \item \textbf{*mscplan} --- Preparation of MSc dissertation. This is a preliminary report graduate students at DI-FCT-NOVA must prepare to conclude the first semester of the two-semesters MSc work. The files specified by \verb!\ntdedicatoryfile! and \verb!\acknowledgmentsfile! are ignored, even if present, for this class of document.
-  \item \textbf{msc} --- MSc dissertation.
-  \item \textbf{phdprop} ---  Proposal for a PhD work. The files specified by \verb!\ntdedicatoryfile! and \verb!\acknowledgmentsfile! are ignored, even if present, for this class of document.
-  \item \textbf{prepphd} ---  Preparation of a PhD thesis. This is a preliminary report PhD students at DI-FCT-NOVA must prepare before the end of the third semester of PhD work. The files specified by \verb!\ntdedicatoryfile! and \verb!\acknowledgmentsfile! are ignored, even if present, for this class of document.
-  \item \textbf{phd} --- PhD dissertation.
-\end{enumerate}
-% subsection class_of_text (end)
-
-% ============
-% = Printing =
-% ============
-\subsection{Printing}
-\label{sub:printing}
-
-You must choose how your document will be printed. The available options are:
-\begin{enumerate}
-  \item \textbf{oneside} --- Single side page printing.
-  \item \textbf{*twoside} --- Double sided page printing.
-\end{enumerate}
-% subsection printing (end)
-
-% =============
-% = Font Size =
-% =============
-\subsection{Font Size}
-\label{ssec:font_size}
-
-You must select the encoding for your text. The available options are:
-\begin{enumerate}
-  \item \textbf{11pt} --- Eleven (11) points font size.
-  \item \textbf{*12pt} --- Twelve (12) points font size. You should really stick to 12pt\ldots
-\end{enumerate}
-% subsection font_size (end)
-
-% =================
-% = Text encoding =
-% =================
-\subsection{Text Encoding}
-\label{ssec:text_encoding}
-
-You must choose the font size for your document. The available options are:
-\begin{enumerate}
-  \item \textbf{latin1} --- Use Latin-1 (\href{http://en.wikipedia.org/wiki/ISO/IEC_8859-1}{ISO 8859-1}) encoding.  Most probably you should use this option if you use Windows;
-  \item \textbf{utf8} --- Use \href{http://en.wikipedia.org/wiki/UTF-8}{UTF8} encoding.    Most probably you should use this option if you are not using Windows.
-\end{enumerate}
-% subsection font_size (end)
-
-% ============
-% = Examples =
-% ============
-\subsection{Examples}
-\label{ssec:examples}
-
-Let's have a look at a couple of examples:
-
-\begin{itemize}
-  \item Preparation of PhD thesis, in portuguese, with 11pt size and to be printed single sided (I wonder why one would do this!)\\
-  \verb!\documentclass[prepphd,pt,11pt,oneside,latin1]{thesisdifct-nova}!
-  \item MSc dissertation, in English, with 12pt size and to be printed double sided\\
-  \verb!\documentclass[msc,en,12pt,twoside,utf8]{thesisdifct-nova}!
-\end{itemize}
-% subsection examples (end)
-
-\section{How to Write Using \LaTeX}
-\label{sec:how_to_write_using_latex}
-
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \LaTeX constructs, such as Sectioning, inserting Figures and Tables, writing Equations, Theorems and algorithms, exhibit code listings, etc.
-
-% section how_to_write_using_latex (end)
-
-
-
-\section{Example glossary, acronyms, and symbols}
-%
-% \todo[inline]{A a note in a line by itself.}
-%
-This is the first occurrence of an abbreviation: \gls{abbrev}. And now the second occurrence of the same abbreviation: \gls{abbrev}. And a new acronym with capital letter: \Gls{xpt} and reused \gls{xpt}.  Let's also use a few other acronyms such as \gls{aaa}, \gls{aab}, \gls{aba}, \gls{bbb} and \gls{xpt}.
-In geometry, the area enclosed by a circle of radius \gls{r} is $\pi r^2$. Here the Greek letter \gls{pi} is equal to the ratio of the circumference of any circle to its diameter.
-Lets add ``\gls{computer}'' to the glossary! Be carefull with mathematical symbols in acronyms, please see the definition of \gls{mu}.
-%
-% Please note that
-% \begin{center}
-%   \textbf{\large this package and template are not official for FCT/NOVA}.
-% \end{center}
-
-
-
-% \printbibliography[heading=subbibliography, segment=\therefsegment, title={\bibname\ for chapter~\thechapter}]
+\chapter{Related Work}\label{cha:related_work}
+
+In this chapter, we provide a more detailed overview of the state-of-the-art concepts introduced in the previous chapter. First, we discuss the concept of Anonymity Networks and Mixnets, followed by a detailed review of notable works in this field. Next, we examine the Tor Network, including key technologies such as Pluggable Transports and the Tor relay node scheduler. We then introduce \(k\)-Anonymity, and finally, we provide an in-depth overview of Differential Privacy.
+
+\section{Anonymity Networks \& Mixnets}\label{sec:anonymity_networks_mixnets}
+
+Mix Networks (Mixnets) were introduced by~\citeauthor{Chaum2003}~\cite{Chaum2003} as a public key cryptography based protocol designed to obscure the relationship between senders and receivers in a communication network, as well as its content, without the need for a universal trusted authority. Mixnets consist of a series of intermediary servers, called `mixes', through which messages are decrypted, encrypted, randomly permuted and sent forward. 
+To transmit messages, participants encapsulate their data within successive layers of encryption, with each layer corresponding to a specific mix in the network — a method conceptually akin to onion routing~\cite{OnionRouting}. The length of the encrypted messages is proportional to the number of mixes. Upon receiving a message, each mix removes the outermost layer of encryption, processes the decrypted instructions, and forwards the partially decrypted message to the subsequent mix. This iterative procedure continues until the message arrives at the final mix, which removes the last layer of encryption and transmits the plaintext message to the intended recipient. By design, this system ensures that no single mix possesses complete knowledge of both the sender's identity and the recipient's address, thereby achieving a robust level of anonymity. 
+
+Various designs of mixnets have been proposed, based on~\citeauthor{Chaum2003} work, addressing multiple security and performance issues. Flash Mixing, introduced by~\citeauthor{FlashMixing}~\cite{FlashMixing}, focuses on achieving strong anonymity guarantees with reduced latency and computational overhead by shuffling messages, broadcasting the encrypted list to all mixes, who then together compute the output. Hybrid Mixnets~\cite*{HybridMixJakobsson, HybridMixMiyako} efficiently combine public-key and symmetric-key cryptography. Real-time Mixnets~\cite{RealTimeMix} aim voice and data communication where continuous data streams have to be transmitted and provide low-latency communication, as long as a certain delay at the start of a connection is tolerable.
+Work on this field has focused both on security and privacy guarantees, as well as on performance and scalability, with the goal of providing a practical and efficient solution for anonymous communication. Mixmaster~\cite{Mixmaster} allows the sender of a message to remain anonymous to the recipient. Mixminion~\cite{Mixminion} uses fixed sized messages and supports anonymous replies and ensures forward anonymity using link encryption between nodes.
+Onion Routing~\cite{OnionRouting} followed a similar approach, but focused on low latency communication, where messages are encrypted in layers and decrypted by a chain of authorized nodes. 
+
+Tor~\cite{dingledine2004tor} is one of the most popular low latency anonymity system and protects against sender-receiver message linking against a partially global adversary and ensures perfect forward secrecy, messages' integrity, and congestion control. However, Tor is vulnerable to traffic analysis attacks, in case the adversary is able to observe the entry and exit points of the network.
+Mix-In-Place (MIP)~\cite{MixInPlace} is a mixnet that uses a cascade of functions in a single proxy, instead of multiple intermediary nodes, to provide anonymity, and proving more resistant to traffic analysis attacks. 
+Vuvuzela~\cite{Vuvuzela} operates in rounds, leading to offline users' inability to receive messages and all messages must transverse a single chain of relay servers. This design protects against both active and passive adversaries unless there is no honest mix node in the network.
+
+\subsection{Groove}\label{subsec:groove}
+Groove~\cite{Groove} is a scalable, metadata-private messaging system designed to support users with multiple devices, enabling them to send messages at any time, even when recipients are offline, while conserving bandwidth and energy. Built on mixnets, Groove ensures unlinkability between senders and their messages by shuffling batches of messages across servers. Traditional mixnets, however, require all users to submit messages during every round and receive messages at a synchronized rate to prevent correlated traffic patterns, which limits their scalability and usability.
+To overcome these limitations, Groove introduces a novel approach called oblivious delegation. In this model, users interact with an untrusted service provider that participates in the mixnet on their behalf and synchronizes their clients across all devices. This ensures that even if the service provider is compromised, an adversary cannot infer communication metadata. Unlike prior systems such as Karaoke~\cite{Karaoke}, Stadium~\cite{Stadium}, and Vuvuzela~\cite{Vuvuzela}, which require users to be online simultaneously, communicate in synchronized rounds, and support only single-device usage, Groove addresses these restrictions, offering asynchronous messaging and multi-device support.
+A significant advantage of Groove lies in its ability to minimize the resource demands of each message channel on the mixnet, with a particularly notable reduction in memory usage compared to earlier systems. Groove ensures Differential Privacy even against attackers with full network control and the ability to compromise multiple servers. Users communicate through persistent message channels, similar to Tor's circuits, while their service provider handles message submission to the mixnet, stores received messages, and synchronizes clients across devices. To maintain anonymity, Groove leverages Parallel Mixnets, which efficiently scale with the number of servers by offering multiple parallel routes for processing messages.
+Differential privacy is a core goal of Groove, ensuring that traffic patterns between a user's client and their service provider do not disclose information about the user's communication partners. This is achieved through a scheduler that operates independently of the sender-recipient relationship. In contrast to Loopix~\cite{Loopix}, Groove maintains user privacy even if their service provider is compromised, eliminating the need for users to operate their own servers.
+
+\subsection{Loopix}\label{subsec:loopix}
+Loopix~\cite{Loopix} is a low-latency anonymous communication system offering bidirectional `third-party' sender and receiver anonymity as well as unobservability. It employs cover traffic and Poisson mixing to provide strong anonymity guarantees and resist traffic analysis by a Global Network Adversary (GNA).
+The system ensures robust sender-receiver unlinkability against a Global Passive Attacker (GPA) capable of observing all network traffic between users, providers, and mix servers, even in cases where some mix nodes are compromised. Loopix also guarantees sender online unobservability under a corrupt provider and receiver unobservability under the condition of an honest provider. Consequently, the GPA cannot infer the type of transmitted messages, while intermediate nodes remain unable to distinguish between real messages, dropped cover messages, or loops of traffic generated by clients and other nodes.
+To protect against active attacks, mixes and clients employ self-monitoring mechanisms through self-injected traffic loops. These loops not only act as cover traffic to strengthen anonymity but also enhance sender and receiver unobservability.
+Similar to Groove, Loopix utilizes service providers to mediate access to the network, manage accounting, and enable offline message reception. These semi-trusted providers enforce rate limits, store messages for offline users, and facilitate message retrieval at a later time. Despite this reliance, Loopix is resilient against adversaries capable of observing all communications and conducting active attacks.
+A distinguishing feature of Loopix is its continuous operation, unlike Groove's deterministic round-based approach. Messages in Loopix can be retrieved at any time, ensuring users do not lose messages while offline. Furthermore, Loopix employs Poisson mixing, a simplified version of the stop-and-go mixing strategy~\cite{StopAndGoMixing}, which introduces independent delays for each message, making packet timings unlinkable.
+Unlike circuit-based onion routing, where a fixed path is established, Loopix determines the communication path for each individual message independently, even when sent between the same pair of users. This approach enhances privacy and unpredictability.
+The Poisson mix operates as follows: mix servers listen for incoming packets, check for duplicates, and decode received messages using their private keys. Duplicates are discarded, and the next mix packet is extracted. Decoded packets are not forwarded immediately; instead, each packet is delayed based on a pre-determined delay specified by the source.
+
+\subsection{Stadium}\label{sec:stadium}
+Stadium~\cite{Stadium} is a point-to-point messaging system that ensures metadata and data privacy while efficiently scaling its workload across hundreds of low-cost providers operated by different organizations. Stadium achieves its provable privacy guarantees through the use of noisy cover traffic and Differential Privacy, which bounds metadata leakage over time.
+The system employs a mixnet architecture, where user messages and noise messages are distributed among providers and mixed in parallel. Each provider processes only a fraction of the total messages, ensuring scalability and efficiency. As long as at least one provider remains honest, Stadium achieves global verification and secure mixing. Communication in Stadium occurs in fixed rounds, with each round processing a batch of messages accumulated from users during the preceding interval.
+To enforce Differential Privacy, servers generate cover traffic at the start of each round. Noise messages are injected into the system in a single, large step before mixing begins. However, this design leaves room for malicious servers to discard noise messages before mixing. To address this vulnerability and ensure that noise remains in the system, Stadium employs cryptographic techniques for verifiable message processing. These techniques enable honest servers to verify the actions of others, preserving the system's Differential Privacy guarantees. To optimize the computational workload of this verification process, Stadium introduces hybrid verifiable shuffling.
+Stadium's mixing process relies on a parallel mixing scheme. Each server initially processes a small fraction of input messages, mixes them, and redistributes the mixed messages among other servers. This cycle of mixing and redistribution is repeated multiple times. Although messages are initially partitioned based on their originating server, the repeated cycles of splitting and mixing result in global mixing across all servers.
+
+\subsection{MIRACE}\label{subsec:mirace}
+MIRACE~\cite{MIRACE} is a censorship circumvention system developed by~\citeauthor{MIRACE} that leverages dynamically constructed circuits to provide secure communications. This work allows traffic to be split across multiple circuits, each composes of several nodes. These solutions combine traffic splitting with encapsulations, through the combination of TLS, QUIC and WebRTC tunnels for diverse covert communication strategies, and traffic shaping, by the addition of jitter and padding.~\citeauthor{MIRACE} demonstrated that MIRACE is able to ensure secure communications against correlation attacks, even with machine learning-based website fingerprinting attacks. The author also showed that MIRACE is able to maintain practical levels of latency and throughput, even with the addition of nodes. Under fingerprinting attacks, MIRACE showed strong levels of resistance with high accuracy and the ability to effectively obscure traffic patterns. 
+ 
+\subsection{Problems \& Analysis}\label{sec:problems_analysis}
+Mixnets have been analyzed in terms of security and privacy guarantees, as well as performance and scalability.~\citeauthor{AnalysisMixNetsYeZhu} revealed that flow-correlation attacks can be used to de-anonymize users in mixnets, in relation to the system parameterization, such as sample size, noise  level, payload flow rate, and detection rate~\cite{AnalysisMixNetsYeZhu}.~\citeauthor{TrafficAnalysisLowMixnet} demonstrated that Mixnets are vulnerable to timing analysis, even with defenses in place, by the use of advanced statistical techniques, such as cross-correlation and machine learning, successfully de-anonymizing users~\cite{TrafficAnalysisLowMixnet}.
+
+\section{Tor Network}\label{sec:tor_network}
+Tor~\cite{dingledine2004tor} is a circuit-based low-latency anonymous communication service based on \textit{onion routing} that aims to anonymize TCP-based applications, such as web browsing, SSH and instant messaging. The network relies on \textit{Onion Routers} (ORs) that are responsible for maintaining TLS connections to every other OR and for forwarding traffic along the circuits, and are also maintained by volunteers.
+
+An \textit{Onion Proxy} (OP) is the local software run on the client and that handles connections with the users' applications, fetches the current network information and the lists of \textit{Onion Routers} (ORs) and builds circuits through the network. Each OP maintains TLS connections to nodes they have been in contact recently and a pair of keys: long-term identity key and short-term onion key. Long-term keys are used to sign TLS certificates and its router descriptor. Short-term keys are used to decrypt requests, negotiate ephemeral keys and set up circuits.
+
+Traffic travels the network through 512 bytes fixed-size \textit{cells} with a header and a payload. The header contains the circuit identifier and the command to describe what to do with the payload. Based on the header's command, cells are either control cells or relay cells. Control cells are used to manage circuits and connections, while relay cells are used to carry data and can only be sent after a circuit is established. Relay cells have a digest assigned by the sender and its header and payload are iteratively encrypted with the symmetric key of each hop up to the target OR.\@ This way, only the last OR in the circuit can read the payload, given the fact that the digest is encrypted to a different value at each step.
+
+The sequences of ORs which traffic is routed through are called \textit{circuits}, normally composed by 3 relays (entry or guard, middle and exit).
+To create a new circuit, a user's OP must execute a Diffie-Hellman key exchange with each OR in the circuit, one hop at a time. This way, each OR knows the previous and the next node in the circuit, but not the source and destination of the data. Once the circuit is established, relay cells are sent through the circuit, 
+
+\subsection{Tor Bridges \& Pluggable Transport}\label{subsec:tor_bridges}
+
+One vulnerability about Tor is the traffic blocking by ISPs of censored regimes. One way to perform this blocking is by blacklisting Tor relays, since the list of their IP addresses is public, which prevents clients from establishing circuits. Bridges come as a solution to this problem, where unpublished proxies forward client's traffic to a Tor entry relay, making the client connect to some unlisted bridge, rather than some potentially blacklisted relay~\cite{Matic2017DissectingTB}.
+Nevertheless, bridges are still vulnerable to traffic fingerprinting attacks.~\citeauthor{Matic2017DissectingTB} demonstrated that 55\% of public bridges are vulnerable to the traffic blocking referred before. Even with encrypted traffic, Tor's traffic is still identifiable by its packet size, currently fixed-sized 512 byte cells, and by the TLS byte patterns, more precisely the TLS extension called Server Name Indication (SNI), which adds the domain name to the TLS header without any encryption.
+
+To overcome this issue, Tor bridges support \textit{pluggable transports} (PT)~\cite{PlugTrans} which transform the Tor traffic flow between the client and the bridge, making traffic monitoring between these look innocent, instead of actual Tor traffic. Some examples of PTs are \textit{obfs4}, \textit{meek}, \textit{Snowflake} and \textit{WebTunnel}~\cite{Circumvention}.\@ \textit{obfs4} obfuscates Tor traffic to make it appear random, thwarting efforts by censors to detect it through Internet scanning; \textit{meek} disguises Tor traffic to resemble ordinary browsing activity on prominent websites; \textit{Snowflake} routes your connection through volunteer-operated proxies to make it look like you're placing a video call instead of using Tor; and \textit{WebTunnel} camouflages Tor traffic by making it indistinguishable from standard HTTPS requests, thereby creating the illusion of accessing a secure website.
+
+\subsection{Tor Hidden Services}\label{subsec:tor_hidden_services}
+Tor circuits, by their inherent design, do not ensure the anonymity of the receiver. This limitation arises from the fact that, for a client to reach a destination via an exit node, the recipient's IP address must be publicly accessible. To address this vulnerability, Tor introduces hidden services and the concept of a rendezvous point (RP) — a Tor relay node that facilitates recipient anonymity through the construction of dual circuits.
+
+Hidden services enable any entity to host a TCP-based service without disclosing its IP address. Clients wishing to access such services utilize a special onion service address, which is derived from the service's public key. This cryptographically generated address provides a secure means of routing without exposing network-layer identifiers.
+
+The fundamental mechanism underpinning hidden services involve the establishment of two distinct Tor circuits: one from the client to the rendezvous point and another from the hidden service to the same point. These circuits are constructed independently, and neither endpoint is aware of the other's IP address. The rendezvous point serves solely as an intermediary to facilitate communication between the two parties.
+
+This architecture inherits the sender anonymity traditionally offered by Tor circuits and extends it to receivers. Only the respective entry nodes of the circuits are aware of the origin of the traffic, and no single entity can link the sender and receiver. Notably, the exit node of the client circuit terminates at the rendezvous point, perceiving it as the ultimate recipient. Consequently, the client does not require knowledge of the hidden service's IP address, thereby ensuring the recipient's anonymity.
+
+In summary, the use of rendezvous points and independently constructed circuits within Tor's hidden service framework effectively achieves mutual anonymity, safeguarding both client and service identities during communication.
+
+\subsection{Tor Circuit Scheduling}\label{subsec:tor_scheduler}
+
+Traffic handling in Tor involves several buffers and schedulers.
+Each circuit is used by only one client but if multiple circuits use the same two ORs, they share the same connection. That is, OR will have multiple simultaneously connections with other ORs but only one to any given OR, and each connection will transport data for various circuits. 
+When a OR receives a packet from an TCP stream, the packet gets demultiplexed, together with other possible incoming packets from different TCP streams, and they get placed into the kernel socket input buffers. Here packets are processed by the OS, usually in FIFO order, and sent to the Tor input buffers. Upon receiving the packets, Tor will remove the TLS layer and onion-encrypted (or onion-decripted, depending on the circuit's direction) and finally enqueued in the Tor Circuit Queue. Each relay maintains a queue for each circuit that it serves. Cells from the same Tor input buffer might not be enqueued in the same circuit queue, as they might belong to different circuits. The cells are then selected, dequeued, onion-encrypted and stored in a Tor output buffer. The data is then written to a kernel socket output buffer when the Tor output buffer contains sufficient data to form a TLS packet.
+
+Tor has a congestion control mechanism (Circuit-Level Throttling), designed to regulate communications across circuits, which ensures resource distribution, prevents network congestion and provides safety against attacks such as Denial-of-Service. As Tor is a low latency network and its security guarantees rely on how many users are using the network, it is important to have a good congestion control mechanism and practical levels of latency and throughput. However, it has been shown that Tor's Circuit Scheduling Algorithm allows busy circuits to crowd out bursty circuits, leading to congestion and latency issues~\cite{EWMA}. Additionally,~\citeauthor{KIST} have demonstrated that Tor's congestion occurs in the kernel socket buffers. Both these works have proposed solutions to improve Tor's congestion control and latency issues~\cite{KIST}.
+
+Even with the improvements in congestion control, as merging~\citeauthor{EWMA} and~\citeauthor{KIST} works, Tor is still vulnerable to traffic analysis attacks such as website fingerprinting and correlation-based attacks~\cite*{KIST}. Even though none of these works presented additional security risks or vulnerabilities to the Tor Network, they have shown little or no improvement in the network against these attacks.
+
+\subsubsection{Exponential Weighted Moving Average (EWMA)}\label{subsubsec:exponentialwma}
+
+\citeauthor{EWMA} proposed a circuit scheduling algorithm that handles circuits by their recent activity, where bursty circuits have higher priority over busy ones~\cite{EWMA}. Generally, bursty circuits are those used for web browsing and instant messaging, and also referred as interactive streams. On the other hand, busy circuits are those used for file transfers, and also referred as non-interactive streams. Interactive streams are more sensitive to latency while non-interactive streams tolerate higher delays.
+The approach is based on the Exponential Weighted Moving Average (EWMA) algorithm, which assigns a weight to each circuit based on the number of cells sent on each circuit. When selecting the circuit to process, the algorithm chooses the one with lowest EWMA value. Usually, newly created circuits have a lower EWMA value, leading to a higher priority. 
+Even though this algorithm has merged into Tor, it has been demonstrated that it actually reduces performance for clients under some network conditions~\cite{shadow-ndss2012}. Additionally, this work does not address the adversaries' ability to correlate and fingerprint users' traffic, which is a major issue in Tor Network.
+
+\subsubsection{Kernel Informed Socket Transport (KIST)}\label{subsubsec:kist}
+
+Motivated by the still congestion problem with Tor and the lack of understanding of where this problem occurs,~\citeauthor{KIST} found that the congestions occurs inside the kernel socket buffers and on Tor's sockets management. They proposed a new scheduling algorithm, Kernel Informed Socket Transport (KIST), that solves these problems by choosing from all circuits with writable data rather than just those belonging to a single TCP socket and by dynamically managing the amount of data written to each socket based on real-time kernel and TCP state information that can be queried from user space. This way, KIST reduces Tor's circuit congestion by more than 30\%, reduces network latency by 18\%, and increases network throughput by nearly 10\%~\cite{KIST}. 
+KIST was merged and configured as default socket scheduling algorithm in Tor since January 2018, replacing the EWMA-based algorithm, referred in Section~\ref{subsubsec:exponentialwma}. Although, KIST authors acknowledge that it does not affect the adversaries abilities to collect accurate measurements required for the throughput correlation attack, compared to the `vanilla' Tor scheduling algorithm.
+
+\subsection{Tor Vulnerabilities}\label{subsec:tor_vulnerabilities}
+
+Studies have pointed that Tor is susceptible to traffic analysis attacks, where an adversary can infer information about a user, like who is communicating with whom, by observing the traffic patterns. Here we cover some of the most common traffic analysis attacks against Tor, which have been demonstrated to be effective in de-anonymizing users.
+
+\subsubsection{Website Fingerprinting Attack}\label{subsubsec:website_fingerprinting_attack}
+
+\citeauthor{chakravarty2014trafficanalysis} also proposed a traffic analysis attack model against Tor where the adversary uses statistical correlation over the server to exit and entry to client traffic to find similar traffic patterns~\cite{chakravarty2014trafficanalysis}. This attack consists on clients generating sustained traffic for a long period of time, by downloading a file for example, and the adversary being therefore able to inject traffic patterns by perturbing the TCP connection. This way, the adversary can obtain traffic analysis from the server to exit node and correlate it with the traffic from the entry node to the client, by finding the flow which carries the injected fingerprint.
+Testing showed that the attack was able to correctly identify the source of anonymous traffic 81.4\% of the time.
+Deep Fingerprinting~\cite{DeepFingerprinting} is a website fingerprinting designed using deep learning techniques, that uses a simple input format and does not require handcrafting feature for classification. The authors demonstrated that this attack is 98.3\% accurate in identifying the website visited by the user.
+\citeauthor{TripletFingerprinting} proposed a website fingerprinting attack that uses triplet networks and a machine learning technique, that requires few training samples, called N-shot learning, which reduces the effort of gathering and training with large datasets~\cite{TripletFingerprinting}. Finally, this work achieved up to 95\% accuracy in identifying the website visited by the user, only by using 20 examples per website.
+
+\subsubsection{Correlation-Based Attacks}\label{subsubsec:correlation_based_attacks}
+
+Correlation attacks were acknowledged by~\citeauthor{dingledine2004tor}~\cite{dingledine2004tor} as a potential threat to users' anonymity guarantees in the Tor Network. These attacks exploit the adversary's ability to observe both the entry and exit points of the network, allowing them to correlate the traffic patterns and de-anonymize users.
+\citeauthor{RAPTOR}~\cite{RAPTOR} proposed asymmetric traffic analysis as an end-to-end timing analysis that allows AS-level adversaries to compromise Tor users' anonymity. Internet path from exit relays to the web server may differ from the path from the web server to the exit relay, allowing the adversary to observe the TCP acknowledgement traffic on the path from the server to the exit relay, even if the adversary is enabled to observe the data traffic on path from the exit relay to the server. This attacks might be applicable where the adversary observes: data traffic from the client to the entry relay and from the exit relay and the server; data traffic from the client to the entry relay and TCP acknowledgement traffic from the server to the exit relay; TCP acknowledgement traffic from the entry relay to the client and data traffic from exit relay to the server; or TCP acknowledgement traffic from the entry relay to the client and TCP acknowledgement traffic from the server to the exit relay. The authors proposed a suite of new attacks against Tor called `RAPTOR', where they demonstrated an accuracy of 95\% in correlating client/server pair. 
+
+DeepCorr~\cite{DeepCorr} and its extension DeepCoFFEA~\cite{DeepCoFFEA} are both systems that leverage advanced deep learning techniques to correlate traffic. DeepCorr is able to correlate Tor flows by first using deep learning to learn a correlation function and then using this function to cross-correlate the traffic. In contrast to website fingerprinting, this work has no need to learn target destinations, instead the function can be used to link flows on arbitrary destinations. Additionally, it does not require the traffic to be sent in the same circuits used to learn the function. DeepCoFFEA extends DeepCorr by using a modified triplet network approach and amplification techniques, demonstrating that it achieved lower computational costs and higher efficiency compared to DeepCorr, improving the accuracy of the correlation attack.
+
+
+\section{k-Anonymity}\label{sec:k_anonymity}
+
+To address the exponential growth in the number and variety of data collections containing person-specific information, and the pressing need to prevent privacy compromise, \(k\)-Anonymity~\cite{KAnonSweeney} emerged as a foundational privacy model. This model ensures data anonymity not only by removing explicit identifiers such as names, addresses, or phone numbers but also by protecting against re-identification through linking or matching data with external sources. It achieves this by mitigating the risk posed by unique characteristics within the dataset.
+
+Earlier work by~\citeauthor{KAnonSweeney} demonstrated the vulnerability of anonymized data to linkage attacks using the 1990 U.S. Census. They highlighted that 87\% of the U.S. population reported characteristics that rendered them unique, and over half of the population could be uniquely identified using just three attributes: place, gender, and date of birth~\cite{IdentifyPeopleSweeney}. To counter these risks,~\citeauthor{KAnonSweeney} defined \(k\)-Anonymity as a property satisfied by a dataset \(\texttt{D}\) if, and only if, each sequence of values for quasi-identifiers in \(\texttt{D}\) is indistinguishable from at least \(k-1\) other records in \(\texttt{D}\). In practical terms, any tuple in \(\texttt{D}\) must be identical to at least \(k-1\) other tuples concerning its quasi-identifiers. This property ensures that the data cannot be easily linked to other sources and protects users from re-identification, with the privacy guarantees strengthening as \(k\) increases.
+
+\citeauthor{KAnoMsgTrans} extended the concept of \(k\)-Anonymity to communication systems, defining a protocol as sender \(k\)-anonymous if it ensures that an adversary attempting to identify the sender of a message can narrow their search to a set of \(k\) potential senders. Similarly, receiver \(k\)-Anonymity guarantees that an adversary can only narrow down the possible recipients to a group of \(k\)~\cite{KAnoMsgTrans}.
+
+Despite its foundational role, \(k\)-Anonymity remains vulnerable to several types of attacks, including unsorted matching, complementary release, and temporal attacks, as noted by~\citeauthor{KAnonSweeney}~\cite{KAnonSweeney}. Unsorted matching attacks exploit the order of tuples in a released dataset, which can be mitigated by randomizing the tuple order. Complementary release attacks arise when subsequent data releases are combined, allowing adversaries to re-identify individuals by correlating datasets. Temporal attacks exploit data changes over time, such as additions, deletions, or modifications, leading to violations of \(k\)-Anonymity guarantees as datasets evolve.
+
+Further research has explored enhancing \(k\)-Anonymity to address its limitations. For instance,~\citeauthor{kAnonymityEffectiveness} observed that receiver \(k\)-Anonymity improves effectiveness against long-term intersection and statistical disclosure attacks. Additionally, incorporating periodic sender \(k\)-Anonymity under low churn conditions enhances resistance to mass surveillance, albeit without achieving an optimal cost function~\cite{kAnonymityEffectiveness}.
+
+Recognizing that \(k\)-Anonymity alone may not suffice to protect privacy in the era of big data,~\citeauthor{BigdataKAnon} proposed combining \(k\)-Anonymity with Differential Privacy. This hybrid approach addresses the challenges posed by the massive scale and interconnected nature of modern data systems~\cite{BigdataKAnon}. Similarly, in response to the proliferation of social networks and the accompanying surge in data collection,~\citeauthor{CAMPAN} introduced an anonymization technique for social network data, masking it according to the \(k\)-Anonymity model~\cite{CAMPAN}.
+
+While \(k\)-Anonymity offers practical privacy guarantees, it is primarily suited for systems prioritizing efficiency over robust anonymity protections. It remains less applicable in scenarios where strong, comprehensive guarantees are essential.
+
+
+\section{Differential Privacy}\label{sec:differential_privacy}
+
+\textit{Differential Privacy}~\cite*{DifPrivacy, DifPrivacyCalNoise, DP_Book}, introduced by~\citeauthor{DifPrivacyCalNoise}, is a formal notion of privacy and is a property of algorithms, rather than data like \(k\)-Anonymity. An algorithm or function satisfies Differential Privacy if for all neighboring datasets \(x\) and \(x'\), and all possible sets of outputs \(S\):
+
+\begin{equation}\label{eq:dp_privacy_mechanism}
+    \frac{\Pr[F(x) \in S]}{\Pr[F(x') \in S]} \leq e^{\varepsilon}
+\end{equation}
+
+In this privacy mechanism definition, \(F\) is a randomized function, and its output will be similar, with or without the data of any specific individual. Moreover, \(F\)'s randomness should be enough so that outputs do not reveal the input data. This way, we can ensure that the privacy of any individual is preserved, by ensuring plausible deniability. This happens because the output of the function cannot be correlated to any specific input, whether the input is present or not. Furthermore, the mechanism can maintain certain level of accuracy, due to having a precise understanding of the noise generation process. Differential Privacy intends to reject no malicious adversary, instead it ensures that the adversary is not capable of inferring any specific information, due to the randomness of the output.
+
+Another important requirement of differential private mechanisms is the \(\epsilon\) parameter~\cite{DP_Book, DifPrivacyCalNoise, AlgFoundationsDP, DifPrivacy}. This parameter is called \textit{privacy parameter}, and it controls the `amount of privacy' that the correspondent function provides. Small values of \(\epsilon\) require \(F\) to provide very similar output when given similar inputs, originating in higher levels of privacy. On the other hand, higher values of \(\epsilon\) allow outputs to diverge more, leading to lower levels of privacy. In practice, \(\epsilon\) should be less or equal to 1, and no greater than 10, to provide meaningful privacy guarantees. 
+
+Differential Privacy originated from the challenge of enabling the extraction of meaningful insights about an underlying population while rigorously safeguarding individual privacy. Therefore, the earlier definitions of this concept were focused on datasets and queries over them. 
+
+
+The Laplace Mechanism was proposed together with the definition of Differential Privacy by~\citeauthor{DifPrivacyCalNoise}~\cite{DifPrivacyCalNoise}. The simplest way to achieve Differential Privacy is by adding noise to the output of a function. The challenge is to balance the injected noise in order to have enough to satisfy the definition of DP but not too much to make the output useless. The Laplace Mechanism is a simple mechanism which, for a function \(f(x)\) that returns a real number, \(F(x)\) satisfies \(\epsilon\)-Differential Privacy:
+
+\begin{equation}\label{eq:laplace_mechanism}
+    F(x) = f(x) + \text{Lap} (\frac{s}{\epsilon})
+\end{equation}
+
+where \(s\) is the sensitivity of the function \(f\), and \(Lap(S)\) denotes sampling from the Laplace distribution with scale \(S\) and center \(0\). 
+
+The sensitivity of a function is a measure of how much the output of the function can change when the input changes. This property is important to determine how much noise should be added to the output of the function, in order to guarantee Differential Privacy. 
+
+\subsection{Properties of Differential Privacy}\label{subsec:properties_differential_privacy}
+
+In this section, we cover the three main properties of Differential Privacy: Sequential Composition, Parallel Composition and Post-Processing.
+
+\subsubsection{Sequential Composition}\label{subsubsec:sequential_composition}
+
+Sequential Compositions~\cite{DP_Book, AlgFoundationsDP} is a major property of Differential Privacy, which determines the total privacy cost of releasing multiple results of differential private mechanisms on the same input. Formally, this property states that if \(F_1(x)\) satisfies \(\epsilon\)-Differential Privacy and \(F_2(x)\) satisfies \(\epsilon'\)-Differential Privacy, then the composition of these two functions, \(G(x) = (F_1(x), F_2(x))\), satisfies \((\epsilon + \epsilon')\)-Differential Privacy. This property is important to algorithms that access data more than once. The bound on privacy cost given by this property is an upper bound, and the actual privacy cost can be lower than the sum of the individual privacy cost.
+
+\subsubsection{Parallel Composition}\label{subsubsec:parallel_composition}
+
+Parallel Composition~\cite{DP_Book, AlgFoundationsDP} can be considered as an alternative to Sequential Composition, as it determines the total privacy cost of releasing multiple results of differential private mechanisms. The idea consists on splitting a dataset into disjoint chunks and applying a differentially private mechanism to each chunk separately. Formally, if \(F(x)\) satisfies \(\epsilon\)-Differential Privacy, and we split the dataset \(X\) into \(k\) disjoint chunks such that \(X = X_1 \cup X_2 \cup \ldots \cup X_k\), then the mechanism that releases all the results \(F(x_1), \ldots F(x_k)\) satisfies \(\epsilon\)-Differential Privacy. Comparatively, to Sequential Composition, Parallel Composition gives a better upper bound. Since \(F\) is run \(k\) times, Sequential Composition states that this procedure satisfies \(k\epsilon\)-Differential Privacy.
+
+An issue with Differential Privacy arises with small datasets. A large dataset is able to achieve a strong privacy guarantee with relatively weak noise, and allows the results to be useful. However, small datasets require stronger noise to achieve the same privacy guarantee.
+As we split the dataset into chunks, we must care for the utility of the results and the impact of the number of chunks that we split the dataset into. The more chunks we split the dataset into, the stronger the noise we must add to the results, and the less useful the results will be.
+
+\subsubsection{Post-Processing}\label{subsubsec:post_processing}
+
+The last property is Post-Processing~\cite{DP_Book, AlgFoundationsDP}, and it states that is impossible to reverse the privacy protection provided by a Differential Privacy by post-processing the data in some way. Formally, if \(F(x)\) satisfies \(\epsilon\)-Differential Privacy, then for any function \(h\), \(h(F(X))\) satisfies \(\epsilon\)-Differential Privacy. This means that no danger will arise from performing additional computations on an output of a differential private mechanism, as the privacy guarantee will be preserved (and not reversed). This property is essential to ensure that Differential Privacy is resistant against privacy attacks based on auxiliary information and that attacks effectiveness is only limited by the privacy parameter \(\epsilon\).
+
+\subsection{Local Differential Privacy}\label{subsec:local_differential_privacy}
+
+Differential Privacy was initially proposed in a central model, where sensitive data was collected in a single dataset and the data curator must be a trusted entity in order to correctly execute differential private mechanisms, even in scenarios where the analyst is malicious~\cite{DP_Book}. However, this assumption might not be very realistic. In practice, the data curator and the analyst might be the same entity, and the data curator might not be trusted, leading to no differential private mechanisms being in place. This way, \textit{Local Differential Privacy} (LDP) raises as a solution in which data is made Differential Privacy before being collected by the data curator, being already used by big companies such as Google~\cite{RAPPOR} and Apple~\cite{AppleDP}. 
+
+\textit{Randomized Response} is a mechanism for LDP, proposed by~\citeauthor{RandomizedResponse}~\cite{RandomizedResponse} in~\citeyear{RandomizedResponse}, intended to improve survey responses about sensitive issues, but was not originally design as a mechanism for Differential Privacy.~\citeauthor{AlgFoundationsDP} presented a variant of this mechanism, in which the subject flips a coin to answer a `yes' or `no' question. If the coin is heads, the subject answers truthfully, otherwise, the subject flips the coin again and answers `yes' if heads and `no' if tails. The randomization in this algorithm comes from the two coin flips, creating uncertainty about the true answer, and therefore providing privacy.
+
+
+\subsection{Differential Private Communication}\label{subsec:diff_priv_comm}
+
+Some studies have been conducted on applying Differential Privacy to communication systems~\cite{VilalongaINForum, StatPrivStreaming, NetShaper}. These studies focus on providing privacy guarantees to users and protect them against traffic analysis attacks, powered by machine learning techniques.
+
+\citeauthor{StatPrivStreaming}~\cite{StatPrivStreaming} proposed a differential private mechanism for streaming data, by the use of a Chrome extension with a DP mechanism that proxies streams between the browser and the server. The extension intercepts the requests from the client, which sends requests on behalf of the client based on a differentially private mechanism, instead of instantly relaying them immediately. The authors found that differentially privacy lowered the machine learning techniques, used by the adversary, efficiency, even though the accuracy of the attack was less affected in case of the adversary training model with the same DP mechanism.
+
+NetShaper~\cite{NetShaper} is a network side-channel mitigation system, proposed by~\citeauthor{NetShaper}, based on traffic shaping, which provides quantifiable and tunable privacy guarantees, through the use of Differential Privacy. This work shapes traffic based on a DP-mechanism that adds noise to the traffic, that can be split into 3 steps: \textit{queue, query, and post-process}. In the first step, the system queues the input traffic. After a fixed parameterizable periodic interval, the system queries the queue and adds noise to the traffic, performed by the differential private traffic shaping algorithm. Finally, the packets are post-processed and transmitted to the network. 
+
+\citeauthor{VilalongaINForum}~\cite{VilalongaINForum} suggested Randomized Response could be used to strengthen the privacy of the Tor network, by adding noise to the traffic, making it harder for adversaries to correlate the traffic and de-anonymize users. The authors proposed a mechanism that uses pluggable transports to connect the client to the Tor Network and a noise-adding algorithm. This algorithm sends packets based on the Randomized Response mechanism, in this case, where the algorithm chooses to send a packet or a noise packet based on a probability.
+
+\section{Summary}\label{sec:related_work_summary}
+
+Anonymity Networks have been around for almost 40 years but advances in machine learning and traffic analysis techniques have compromised the privacy guarantees that these networks aim to provide. Tor is a widely used low-latency Anonymity Network that has been shown to be vulnerable to such attacks. We take a particular interest in the developments on Tor's scheduling algorithms that proposed (and later been merged into the source code) solutions to improve Tor's congestion control. The works referred in this chapter have both demonstrated effects in performance and congestion control but lack on providing privacy guarantees that Tor aims to provide. Some work on Anonymity Network, including Tor, have tried to mitigate these attacks, such as website fingerprinting and correlation-based attacks, but they lack on giving formal privacy guarantees. In most of the cases, privacy and security are only measured by practical testing, which may not be enough to ensure that the network is secure and private, if some conditions are not rigorously tested and proven. To address this problem, this dissertation introduces formal privacy guarantees to Anonymity Networks, more precisely to Tor, by implementing a Differential Private Tor Socket Scheduler that, which also offers adaptable and parameterizable privacy protections. To this day, there is no work that focus on applying Differential Privacy techniques into Tor Network. 

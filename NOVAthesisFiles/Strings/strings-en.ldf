@@ -11,15 +11,6 @@
 %%% English - strings
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\AtEndPreamble{
-\StartBabelCommands*{english}{date}
-  \SetStringLoop{month#1name}{%
-      January,February,March,April,May,June,%
-      July,August,September,October,November,%
-      December}
-\EndBabelCommands
-}
-
 \bkmstring(frontmatter,en):={Front Matter}
 \bkmstring(backmatter,en):={Back Matter}
 \bkmstring(cover,en):={Cover}
@@ -102,7 +93,7 @@
 \committeestring(g,1,m,en):={Guest}
 \committeestring(g,1,f,en):={Guest}
 \committeestring(g,2,m,en):={Guests}
-\committeestring(g,2,f,en):={Guests}
+\committeestring(g,2,f,em):={Guests}
 
 \dissertationstring(bsc,en)={Report submitted in partial fulfillment
 of the requirements for the degree of\\[1.25ex]%

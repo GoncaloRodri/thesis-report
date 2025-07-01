@@ -13,7 +13,7 @@ V:=open -a skim
 # DO NOT TOUCH BELOW THIS POINT
 #############################################################################
 
-# If a file "tempalte.tex" is found, usennn it as the main file
+# If a file "tempalte.tex" is found, use it as the main file
 # otherwise, use the first (alphabetically) .tex file found as the main file
 ifeq ($(MF),)
 TEX:=$(patsubst %.tex,%,$(wildcard *.tex))
@@ -23,31 +23,18 @@ MF:=$(word 1,$(TEX))
 endif
 endif
 
-# Turn of PROFILING for the developer
-WHOAMI:=$(shell whoami)
-ifeq ($(WHOAMI),jml)
-PROFILING:=-usepretex="\def\PROFILING{1}"
-endif
-
-
 # Find out which versions of TeX live are available (works for macos)
 TEXVERSIONS=$(shell ls /usr/local/texlive/ | fgrep -v texmf-local)
 
 # Customize latex compilation
+SILENT:=-interaction=batchmode #-silent
+SYNCTEX:=1
 B:=$(MF)
 T:=$(MF).pdf
 S:=$(MF).tex
 
-ifndef AUXDIR
-AUXDIR:=./AUXDIR
-export AUX_DIR=$(AUXDIR)
-endif
-
-MK:=latexmk $(MKF)
-MKF:=-time -interaction=batchmode -shell-escape -synctex=1 -file-line-error -f -auxdir=$(AUXDIR) $(PROFILING) $(FLAGS)
-
-CT=cluttex $(CTF)
-CFT:=
+L:=latexmk $(F)
+F:=-time -shell-escape -synctex=$(SYNCTEX) -file-line-error $(FLAGS)
 
 # target and files to be incldued in "make zip"
 ZIPFILES:=NOVAthesisFiles Bibliography Config Chapters LICENSE Makefile novathesis.cls README.md .gitignore template.tex
@@ -55,7 +42,7 @@ ZIPTARGET=$(B)-$(VERSION)@$(DATE).zip
 
 # extract version and date of the template
 VERSION=$(shell head -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/')
-DATE=$(shell tail -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/' | tr '\n' '@'m| sed -e 's/\(.*\)./\1/')
+DATE:=$(shell tail -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/' | tr '\n' '@'m| sed -e 's/\(.*\)./\1/')
 
 # aux files
 AUXFILES:=$(shell ls $(B)*.* | fgrep -v .tex | fgrep -v .pdf | sed 's: :\\ :g' | sed 's:(:\\(:g' | sed 's:):\\):g')
@@ -79,16 +66,6 @@ else
 	make xe
 endif
 
-.PHONY: ct mk
-ct mk:
-ifeq ($@,ct)
-	@echo Using cluttex
-else
-ifeq ($@,mk)
-	@echo Using latexmk
-endif
-endif
-	make CTMK=$@ $(filter-out $@,$(MAKECMDGOALS))
 
 #############################################################################
 # Main targets:
@@ -124,11 +101,7 @@ $(TEXVERSIONS):
 #————————————————————————————————————————————————————————————————————————————
 .PHONY: pdf xe lua
 pdf xe lua: $(S)
-ifeq ($(CTMK),ct)	
-	$(CT) -e pdf$(patsubst pdf%,%,$@)latex $(CTF) $(B)
-else
-	$(MK) -pdf$(patsubst pdf%,%,$@) $(MKF) $(B)
-endif
+	$(L) -pdf$(patsubst pdf%,%,$@) $(SILENT) $(F) $(B)
 	@ eval "$$printtimes"
 
 #————————————————————————————————————————————————————————————————————————————
@@ -157,9 +130,8 @@ zip:
 #————————————————————————————————————————————————————————————————————————————
 .PHONY: clean
 clean:
-	@$(MK) -c $(B)
+	@$(L) -c $(B)
 	@rm -f $(AUXFILES) "*(1)*"
-	@rm -rf $(AUXDIR)
 	@find . -name .DS_Store -o -name '_minted*' | xargs rm -rf
 
 #————————————————————————————————————————————————————————————————————————————
@@ -186,17 +158,20 @@ endif
 bump1 bump2 bump3:
 ifneq (, $(wildcard Scripts/newversion.sh))
 	Scripts/newversion.sh $(subst bump,,$@)
-	@$(call _mtp,$(shell head -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/'),$(shell tail -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/' | tr '\n' '@'m| sed -e 's/\(.*\)./\1/'))
+	@$(call mtp)
 endif
+
+
 
 #————————————————————————————————————————————————————————————————————————————
 .PHONY: mtp
 mtp:
-	@$(call _mtp,$(shell head -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/'),$(shell tail -1 NOVAthesisFiles/nt-version.sty | sed -e 's/.*{//' -e 's/\(.*\)./\1/' | tr '\n' '@'m| sed -e 's/\(.*\)./\1/'))
+	@$(call mtp)
+
+
 
 #————————————————————————————————————————————————————————————————————————————
 .PHONY: time
-
 time times:
 	@ eval "$$printtimes"
 
@@ -206,8 +181,8 @@ time times:
 #————————————————————————————————————————————————————————————————————————————
 define _printtimes
 printf "TIMES FROM THE LAST EXECUTION\n"
-TIMES="$(grep -e 'l3benchmark. + TOC'  ${AUX_DIR}/*.log | cut -d ' ' -f 4 | xargs)"
-PHASES="$(fgrep TIME ${AUX_DIR}/*.log | cut -d ' ' -f 2-3 | cut -d '=' -f 1 | tr ' ' '_' | xargs)"
+TIMES="$(grep -e 'l3benchmark. + TOC'  *.log | cut -d ' ' -f 4 | xargs)"
+PHASES="$(fgrep TIME *.log | cut -d ' ' -f 2-3 | cut -d '=' -f 1 | tr ' ' '_' | xargs)"
 declare -a TM=($TIMES)
 declare -a PH=($PHASES)
 for i in `seq 0 $((${#TM[@]}-1))`; do
@@ -222,19 +197,19 @@ export printtimes = $(shell true)
 endif
 
 # merge, tag and push
-define _mtp
-	echo "VERSION=$(1) - DATE=$(2)."
+define mtp
 	make clean
-	git reset template.pdf
-	git checkout origin template.pdf
-	git commit --all --message "Version $(1) - $(2)." || true
+	echo "VERSION IS $(VERSION)"
+	git commit --all --message "Version $(VERSION)."
 	git checkout main
-	git reset template.pdf
-	git checkout origin template.pdf
 	git pull
 	git merge -m "Merge branch 'develop'" develop
-	git tag -f -a "v$(1)" -m "Version $(1) - $(2)."
+	git tag -a "v$(VERSION)" -m "Version $(VERSION)."
 	git push --all
-	git push -f --tags
+	git push --tags
 	git checkout develop
 endef
+
+
+run:
+	@ eval "$$script"

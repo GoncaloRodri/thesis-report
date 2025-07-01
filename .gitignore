@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/latex,windows,linux,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=latex,windows,linux,macos
 
+.vscode/
+
 ### NOVAthesis template ###
 
 # Ignore all template files…
@@ -61,7 +63,6 @@ _minted-template
 ## Build tool directories for auxiliary files
 # latexrun
 latex.out/
-AUXDIR/
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms
@@ -337,7 +338,8 @@ TSWLatexianTemp*
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

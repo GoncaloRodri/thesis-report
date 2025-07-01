@@ -8,44 +8,22 @@
 
 \typeout{NT FILE abstract-pt.tex}%
 
-Independentemente da língua em que a dissertação está escrita, geralmente esta contém pelo menos dois resumos: um resumo na mesma língua do texto principal e outro resumo numa outra língua.
 
-A ordem dos resumos varia de acordo com a escola. Se a sua escola tiver regulamentos específicos sobre a ordem dos resumos, o template (\LaTeX) \gls{novathesis} irá respeitá-los. Caso contrário, a regra padrão no template \gls{novathesis} é ter em primeiro lugar o resumo \emph{no mesmo idioma do texto principal} e depois o resumo \emph{no outro idioma}. Por exemplo, se a dissertação for escrita em português, a ordem dos resumos será primeiro o português e depois o inglês, seguido do texto principal em português. Se a dissertação for escrita em inglês, a ordem dos resumos será primeiro em inglês e depois em português, seguida do texto principal em inglês.
-%
-No entanto, esse pedido pode ser personalizado adicionando um dos seguintes ao arquivo \verb+5_packages.tex+.
+A Internet tornou-se uma ferramenta indispensável para aceder à informação e exercer a liberdade de expressão, um direito fundamental que confere poder aos indivíduos em todo o mundo. No entanto, os regimes autoritários e as entidades governamentais tendem a restringir este direito através de práticas de vigilância e censura. Estes esforços têm-se tornado cada vez mais sofisticados, recorrendo a técnicas como a análise de tráfego e métodos avançados de correlação de dados para monitorizar e comprometer o anonimato dos utilizadores.
 
-\begin{verbatim}
-    \abstractorder(<MAIN_LANG>):={<LANG_1>,...,<LANG_N>}
-\end{verbatim}
+Em resposta à crescente necessidade de comunicações seguras e privadas, surgiram redes de anonimato como o Tor, que desempenham um papel essencial na proteção das comunicações online e na resistência à censura, das quais milhões de pessoas dependem diariamente. No entanto, investigações recentes demonstraram que ataques de desanonimização podem ser conduzidos por adversários poderosos a nível estatal, utilizando correlação de tráfego e técnicas avançadas de aprendizagem automática para identificar padrões e comprometer a privacidade dos utilizadores.
 
-Por exemplo, para um documento escrito em Alemão com resumos em Alemão, Inglês e Italiano (por esta ordem), pode usar-se:
-\begin{verbatim}
-    \ntsetup{abstractorder={de={de,en,it}}}
-\end{verbatim}
+Esta dissertação aborda estes desafios, reforçando as defesas da rede Tor contra os ataques supramencionados. O principal objetivo é desenvolver uma solução inovadora para melhorar os nós de retransmissão Tor (Relay Nodes), aproveitando a arquitetura de software existente e introduzindo garantias formais de privacidade baseadas em circuitos privados diferenciados. Pretende-se que a solução proposta preserve níveis práticos de throughput e latência para comunicações de ponta a ponta, garantindo a compatibilidade com cenários de utilização real e proporcionando aos utilizadores uma proteção do anonimato mais robusta e adaptável.
 
-Relativamente ao seu conteúdo, os resumos não devem ultrapassar uma página e frequentemente tentam responder às seguintes questões (é imprescindível a adaptação às práticas habituais da sua área científica):
+Como referido anteriormente, o cerne da solução proposta assenta na integração dos princípios da Privacidade Diferencial, introduzindo dinamicamente ruído aleatório cuidadosamente delimitado nos fluxos de tráfego, mitigando os ataques de correlação e reforçando a resistência à recolha de impressões digitais. Tanto quanto é do nosso conhecimento, os contributos esperados desta dissertação poderão representar um avanço pioneiro na incorporação da Privacidade Diferencial na arquitetura de software dos nós de retransmissão Tor (Relay Nodes).
+Além disso, a aplicação da Privacidade Diferencial permitirá o desenvolvimento de um mecanismo formalmente comprovado, escalável e eficaz, que reforça o anonimato online e se mantém resiliente face às técnicas mais avançadas de censura na Internet, protegendo, assim, o direito fundamental à liberdade de expressão num mundo digital cada vez mais sujeito a monitorização.
 
-\begin{enumerate}
-  \item Qual é o problema?
-  \item Porque é que é um problema interessante/desafiante?
-  \item Qual é a proposta de abordagem/solução?
-  \item Quais são as consequências/resultados da solução proposta?
-\end{enumerate}
-
-% E agora vamos fazer um teste com uma quebra de linha no hífen a ver se a \LaTeX\ duplica o hífen na linha seguinte se usarmos \verb+"-+… em vez de \verb+-+.
-%
-% zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz comentar"-lhe zzz zzzz zzz zzzz
-%
-% Sim!  Funciona! :)
-
-% Palavras-chave do resumo em Português
-% \begin{keywords}
-% Palavra-chave 1, Palavra-chave 2, Palavra-chave 3, Palavra-chave 4
-% \end{keywords}
 \keywords{
-  Primeira palavra-chave \and
-  Outra palavra-chave \and
-  Mais uma palavra-chave \and
-  A última palavra-chave
+    Redes de Anonimato
+    \and Privacidade Diferencial
+    \and Comunicação Preservadora de Privacidade
+    \and Ataques de Análise de Tráfego
+    \and Garantias Reforçadas de Privacidade Ponto a Ponto 
+    \and Correlação de Tráfego
 }
-% to add an extra black line
+
