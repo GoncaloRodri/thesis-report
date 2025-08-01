@@ -114,11 +114,30 @@ In comparison to the original Tor cell lifetime, the main differences are the st
 
 \section{Parameterization}\label{sec:parameterization}
 
+% Explain torrc existence and how it is used to configure the Tor network, and how we use it to configure our solution.
+
+% Explain in more depth the parameterization of the solution, and the main goal of our paramenterizations (paramenters give user control of privacy -> more privacy -> more randomness -> which leads to the need to configure and parameterize algorithms and mechanisms generation of random integers or booleans)
+
 \subsection{Used Techniques}\label{sec:used_techniques}
+
+% To generate pseudo random outcomes -> inspired on DP -> added a library to Tor's source code to generate said numbers and outcomes to be used in the scheduler and Packet Padding Cells generation mechanisms.
+
+% To generate a random number, we need a random number generator
+% -> Uniform; Laplace; Poisson; Exponential; Gaussian; Normal
+
+% Add code ?
+
+% To generate or not PPCs, we need a boolean decision generator -> DP Randomized Response
+
+% Insert DPRR Pseudo Code here
 
 \subsection{Jitter Parameterization}\label{sec:jitter_parameterization}
 
+% See notebook
+
 \subsection{Packet Padding Cells Parameterization}\label{sec:packet_padding_parameterization}
+
+% See notebook
 
 \section{Jitter Development Strategy}\label{sec:jitter_development_strategy}
 
