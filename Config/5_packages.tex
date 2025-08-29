@@ -49,13 +49,45 @@
 \usepackage[table]{xcolor} % For coloring table rows
 % \usepackage{indentfirst}       % Indent first list after a (sub)section title
 
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
 % \usepackage{algorithm2e}
 % \RestyleAlgo{ruled}
 
-% \usepackage{minted}    % Fontification of source code listings
+\usepackage{listings}    % Fontification of source code listingsConfig/5_packages.tex
+%                         
 
-% \usepackage{listings}    % Fontification of source code listingsConfig/5_packages.tex
-%                          % In alternative, use the package “minted” (highly recomended)
+\definecolor{codegreen}{rgb}{0,0.5,0}      % Comments
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}      % Line numbers
+\definecolor{codepurple}{rgb}{0.58,0,0.82}    % Strings
+\definecolor{codeblue}{rgb}{0.0,0.0,0.6}      % Keywords
+\definecolor{backcolour}{rgb}{0.98,0.98,0.97} % A very light gray background % In alternative, use the package “minted” (highly recomended)
+
+\lstset{
+    language=bash,                      % Default language
+    backgroundcolor=\color{backcolour},   % Set the background color
+    commentstyle=\color{codegreen}\itshape, % Italic green comments
+    keywordstyle=\color{codeblue}\bfseries, % Bold blue keywords
+    numberstyle=\tiny\color{codegray},    % Small gray line numbers
+    stringstyle=\color{codepurple},       % Purple strings
+    basicstyle=\ttfamily\footnotesize,    % Monospaced font, small size
+    breakatwhitespace=false,            % Don't automatically break lines only at whitespace
+    breaklines=true,                    % Enable automatic line breaking
+    captionpos=b,                       % Captions at the bottom
+    keepspaces=true,                    % Preserve indentation
+    numbers=left,                       % Line numbers on the left
+    numbersep=5pt,                      % Space between numbers and code
+    showspaces=false,                   % Don't show spaces
+    showstringspaces=false,             % Don't show spaces in strings
+    showtabs=false,                     % Don't show tabs
+    tabsize=2,                          % 2-space tabs
+    frame=tb,                           % Frame with top and bottom lines
+    rulecolor=\color{black!30},         % Light gray color for frame lines
+    title=\lstname,                     % Show filename for \lstinputlisting
+    morekeywords={echo, sudo, apt, curl, grep, docker, snap, git}  % Add extra keywords for Bash
+}
 
 % \lstset{
 %     captionpos=t,
@@ -63,9 +95,8 @@
 %     numbers=left,
 %     numberstyle={\ttfamily\tiny},
 %     tabsize=2,
-%     language=Java,
 %     float,
-%     frame=single,
+%     frame=tb,
 %     columns=fullflexible,
 %     breaklines=true,
 %     postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
@@ -84,3 +115,6 @@
 %       {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
 %       {€}{{\EUR}}1 {£}{{\pounds}}1
 % }
+
+\usepackage{multirow}
+\usepackage{placeins}
