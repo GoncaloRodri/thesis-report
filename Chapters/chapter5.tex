@@ -274,7 +274,7 @@ As expected, the number of false cells and their ratio to total cells decreases 
 In this section, we evaluate the resistance of our system, focusing on the capability to withstand website fingerprinting attacks. As mentioned before in~\autoref{subsubsec:website_fingerprinting_attack}, this form of traffic analysis aims to identify the websites a user is visiting, by trying to infer the user traffic and analyzing encrypted traffic patterns.
 The following subsections present the methods and tools used to perform our evaluation and the experimental observations.  
 
-\subsection{Methods and Tools}\label{sec:methods_and_tools}
+\subsection{Methods and Tools}\label{subsec:methods_and_tools}
 
 To evaluate the resistance of our system against website fingerprinting attacks, we collected traces of website accesses to be used to train and test several machine learning models. We selected 100 websites from the Tranco Top 1M website list~\cite{LePochat2019}, and sampled each website 50 times, generating 5 000 samples per test configuration. The traces were captured using \texttt{tcpdump} to generate a \textit{pcap} for each sample and for each circuit segment. The website access was simulated by executing \texttt{curl} requests to the list of websites. To perform these requests, we disabled caching to ensure that each request was treated as a new visit. The captured \textit{pcap} files recorded all packet-level network activity, such as packet size, timing, and direction, thus used to evaluate resistance to fingerprinting attacks. 
 
@@ -292,11 +292,168 @@ With the before-mentioned traces and to perform the unobservability evaluation, 
 \paragraph{XGBoost:} An optimized version of Gradient Boosting, known for its computational efficiency and superior performance. It incorporates regularization techniques that prevent overfitting and improve model generalization, making it particularly suitable for large datasets. Its ability to model complex, non-linear patterns efficiently enables it to uncover subtle patterns.
 
 \subsubsection{Evaluation Metrics}
-To evaluate the capability of our system in mitigating website fingerprinting attacks, we measured each model effectiveness using the following metrics: 
+
+With these models, we were able to train and test these machine learning algorithms using the collected traces, referred in~\autoref{subsec:methods_and_tools}, to evaluate the resistance of our system against website fingerprinting attacks. 
+To assess the effectiveness of our system in mitigating these attacks and of each machine learning model, we extracted several evaluation metrics such as:
+
+\paragraph{Accuracy:} Accuracy measures the ratio of correct predictions, True Positives (TP) and True Negatives (TN), to the total number of predictions, including False Positives (FP) and False Negatives (FN). This metric provides a general overview of the model's performance.  
+
+\[ \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \]
+
+\paragraph{Precision:} Precision measures the ratio of true positive to the total number of positives, important to understand the accuracy of positive predictions and the model's ability to avoid false positives.
+
+\[
+\text{Precision} = \frac{TP}{TP + FP}
+\]
+
+
+\paragraph{Recall:} Recall measures the ratio of true positives to the total number of actual positives, important to understand the model's ability to identify all relevant instances and avoid false negatives.
+
+\[
+\text{Recall} = \frac{TP}{TP + FN}
+\]
+
+\paragraph{F1-Score:} The F1-Score is the harmonic mean of precision and recall, providing a balanced measure that considers both metrics. It is particularly useful when the class distribution is imbalanced.
+
+\[
+\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\]
+
+
+We consider a true positive if the model correctly identifies a website, a true negative if it correctly identifies that a non-website classes, a false positive if it incorrectly identifies a website, and a false negative if it fails to identify a website. 
 
 \subsection{Experimental Observations}\label{sec:experimental_observations_unobservability}
 
+In this section, we present the results of our unobservability evaluation, focusing on the performance of the machine learning models in identifying websites based on the collected traces. We conducted experiments using different configurations of our system, varying the $\epsilon$ values for both the Packet Padding Cells feature and the Schedulers feature. To ease the understanding the performance of each model and each configuration, we present the results in tables and by metric, with 4 test scenarios: control (without any feature), only Packet Padding Cells feature with minimum $\epsilon$ value, only Schedulers feature with minimum $\epsilon$ value and both features with minimum $\epsilon$ values. This way, we can better understand the impact of each feature on the resistance against website fingerprinting attacks, as well as the combined effect of both features.
+
+\subsubsection{Accuracy}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Model} & \textbf{Control} & \textbf{Only PPC} & \textbf{Only Scheduler} & \textbf{Both Features} \\
+        \midrule
+        Naïve Bayes        & 0 & 0 & 0 & 0 \\
+        Logistic Regression & 0 & 0 & 0 & 0 \\
+        KNN                 & 0 & 0 & 0 & 0 \\
+        SVM                 & 0 & 0 & 0 & 0 \\
+        Random Forest       & 0 & 0 & 0 & 0 \\
+        Extra Trees         & 0 & 0 & 0 & 0 \\
+        Gradient Boosting   & 0 & 0 & 0 & 0 \\
+        XGBoost             & 0 & 0 & 0 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Comparison of models' accuracy}\label{tab:models_accuracy_comparison}
+\end{table}
+
+
+
+\subsubsection{Precision}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Model} & \textbf{Control} & \textbf{Only PPC} & \textbf{Only Scheduler} & \textbf{Both Features} \\
+        \midrule
+        Naïve Bayes        & 0 & 0 & 0 & 0 \\
+        Logistic Regression & 0 & 0 & 0 & 0 \\
+        KNN                 & 0 & 0 & 0 & 0 \\
+        SVM                 & 0 & 0 & 0 & 0 \\
+        Random Forest       & 0 & 0 & 0 & 0 \\
+        Extra Trees         & 0 & 0 & 0 & 0 \\
+        Gradient Boosting   & 0 & 0 & 0 & 0 \\
+        XGBoost             & 0 & 0 & 0 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Comparison of models' precision}\label{tab:models_precision_comparison}
+\end{table}
+
+\subsubsection{Recall}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Model} & \textbf{Control} & \textbf{Only PPC} & \textbf{Only Scheduler} & \textbf{Both Features} \\
+        \midrule
+        Naïve Bayes        & 0 & 0 & 0 & 0 \\
+        Logistic Regression & 0 & 0 & 0 & 0 \\
+        KNN                 & 0 & 0 & 0 & 0 \\
+        SVM                 & 0 & 0 & 0 & 0 \\
+        Random Forest       & 0 & 0 & 0 & 0 \\
+        Extra Trees         & 0 & 0 & 0 & 0 \\
+        Gradient Boosting   & 0 & 0 & 0 & 0 \\
+        XGBoost             & 0 & 0 & 0 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Comparison of models' recall}\label{tab:models_recall_comparison}
+\end{table}
+
+\subsubsection{F1-Score}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Model} & \textbf{Control} & \textbf{Only PPC} & \textbf{Only Scheduler} & \textbf{Both Features} \\
+        \midrule
+        Naïve Bayes        & 0 & 0 & 0 & 0 \\
+        Logistic Regression & 0 & 0 & 0 & 0 \\
+        KNN                 & 0 & 0 & 0 & 0 \\
+        SVM                 & 0 & 0 & 0 & 0 \\
+        Random Forest       & 0 & 0 & 0 & 0 \\
+        Extra Trees         & 0 & 0 & 0 & 0 \\
+        Gradient Boosting   & 0 & 0 & 0 & 0 \\
+        XGBoost             & 0 & 0 & 0 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Comparison of models' F1-Score}\label{tab:models_f1score_comparison}
+\end{table}
+
 \section{Formal Validation}\label{sec:formal_validation}
+
+As previously mentioned in~\autoref{sec:differential_privacy}, our approach leverages Differential Privacy principles to enhance the anonymity of users within the Tor network. In this section, we provide a formal validation of our solution by redefining differential privacy in the context of our system and relating its theorems to our proposed mechanisms: size sets and delta sets.
+
+An algorithm satisfies Differential Privacy if, for any two adjacent datasets (differing by a single element), the probability of any output does not change significantly when one element is added or removed. This algorithm uses a randomized function, here denoted as $F$, and its output will be similar for both datasets, with a bound defined by the privacy parameter $\epsilon$. This parameter provides a knob to tune the amount of privacy the definition provides.
+
+Our solution introduces two key mechanisms to achieve differential privacy: Packet Padding Cells, which vary the size of TLS packets, and the Jitter Injection Schedulers, which vary the time intervals between TLS Packets. This way, we consider two datasets as adjacent if they differ by a single packet size or a single time interval, respectively.
+
+The first mechanism, Packet Padding Cells, modifies the size of TLS packets by adding dummy data, which provides irreversible privacy to the TLS packets sizes, through the Post Processing property, thereby creating a set of possible packet sizes (size sets). This feature ensures that the probability of observing a particular packet size remains similar, regardless of whether a specific packet is present or absent in the dataset, with the use of a randomized response algorithm, such as~\autoref{lst:randomized_response}. 
+More formally, for any two adjacent datasets $D$ and $D'$, and for any possible output $S$ (a specific packet size), the following condition holds:
+\[P(F(D) \in S) \leq e^{\epsilon} \cdot P(F(D') \in S)\]
+
+In this context, $F$ represents the randomized response function that adds padding to packets, which satisfies $\epsilon$-differential privacy. 
+
+The second mechanism, Jitter Injection Schedulers, introduces variability in the timing of packet transmissions by adding random delays (delta sets). This feature leverages mathematical distributions, such as~\autoref{lst:poisson_distribution} to generate differential private time intervals, ensuring that the timing of packet transmissions does not reveal information about the presence or absence of specific packets. Formally, for any two adjacent datasets $D$ and $D'$, and for any possible output $T$ (a specific time interval), the following condition holds:
+\[P(F(D) \in T) \leq e^{\epsilon} \cdot P(F(D') \in T)\]
+
+\begin{lstlisting}[language=C, caption={Poisson Distribution Pseudo-Random Number Generator implementation.}, label={lst:poisson_distribution}]
+  int poisson_mechanism(double epsilon, int target, int lower, int upper)
+  {
+    const double lambda = (double)(upper - lower) / epsilon;
+
+    double p = exp(-lambda);
+    double sum = p;
+    int k = 0;
+
+    while (sum < uniform()) {
+        k++;
+        p *= lambda / k;
+        sum += p;
+    }
+
+    return CLAMP(lower, target + k, upper);
+  }
+\end{lstlisting}
+
+In this context, $F$ represents the randomized function that adds jitter to packet transmissions. Moreover, given $f$ as the function that givens default time interval between packets, we can define $F$ as:
+\[F(D) = f(D) + \text{Poisson}(\lambda)\]
+where $\text{Poisson}(\lambda)$ is a random variable drawn from a Poisson distribution with parameter $\lambda$.
+
+Both features most be carefully used to ensure minimal privacy loss, as the total privacy cost of multiple differentially private mechanisms is the sum of their individual privacy costs, according to the Sequential Composition theorem. Therefore, if both features are applied to the same dataset, the overall privacy guarantee is given by:
+\[P(F(D) \in G) \leq e^{\epsilon_1 + \epsilon_2} \cdot P(F(D') \in G)\]
+where $\epsilon_1$ and $\epsilon_2$ are the privacy parameters for the Packet Padding Cells and Jitter Injection Schedulers, respectively, and $G$ is any possible output (a specific packet size and time interval).
 
 \section{Discussion}\label{sec:validation_discussion}
 
