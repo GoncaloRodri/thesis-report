@@ -12,4 +12,15 @@
 
 \section{Main Contributions}\label{sec:main_conclusions}
 
+Our main contribution is the extension of Tor source code with 2 independent features focused on enhancing its unobservability capabilities. The prototype can be used by the scientific community and practitioners to investigate the developed features and extend the solution with more mathematical distributions and differential privacy algorithms, for example. Also, Tor network users can deploy their relays or use the developed solution in the already existing Tor network, as the solution is fully compactible. Our additional contributions include (1) a comprehensive analysis of TTT's performance in more than 170 testing configurations on an emulated local Tor network and over 170 testing configurations on a distributed Tor network, assessing latency, throughput and total time conditions over multiple different real-world conditions; (2) a detailed study of the performance of 9 machine learning models and the resistance of the prototype against website fingerprinting attacks; (3) formal validation of the Differential Privacy properties of the developed prototype and the implications of such properties in the Tor network, for both their users and hosts; and (4) a strong solution that enhances Tor software and network fingerprinting resistance with better privacy guarantees for its users, through the addition of a randomized response algorithm to generate false cells and the adaption of 2 Tor schedulers to use mathematical distributions to add jitter condition and randomly modify the time intervals between each packet.
+
 \section{Future Work}\label{sec:future_work}
+
+The work developed in this thesis opens several promising avenues for future research and development. Potential directions include, but are not limited to, the following:
+\begin{itemize}
+    \item \textbf{Integration with the Tor project}: Incorporating the proposed solution into the official Tor source codebase in order to validate its utility and assess its long-term impact within the broader Tor community.
+    \item \textbf{Broader unobservability testing}: Conducting unobservability evaluations under a wider range of configurations to gain deeper insights into which settings yield the most robust protection.
+    \item \textbf{Extension of the Packet Padding Cells feature}: Enhancing the current implementation to generate padding cells not only after receiving a Tor cell, but also during periods of inactivity. This modification has the potential to further strengthen the system's Differential Privacy guarantees.
+    \item \textbf{Evaluation in realistic distributed environments}: Performing experimental validation on a geographically distributed test bench with relays spanning multiple continents, thereby approximating real-world network conditions more closely.
+    \item \textbf{Expansion of machine learning-based unobservability experiments}: Extending the experimental framework to encompass a broader variety of machine learning algorithms and significantly larger datasets, in order to obtain more comprehensive and generalizable results.
+\end{itemize}
