@@ -10,15 +10,15 @@
 
 \chapter{Introduction}\label{cha:introduction}
 
-Freedom of speech and access to information are fundamental rights that many people take for granted. However, in some regions of the world, these rights are denied due to powerful and oppressive regimes and state level adversaries with access to vast resources that control the flow of information and restrict the access to the internet, in order to control the population~\cite*{aryan2013internet, zittrain2017shifting, alimardani2018internet}. 
+Freedom of speech and access to information are fundamental rights that many people take for granted. However, in some regions of the world, these rights are denied due to powerful and oppressive regimes and state-level adversaries with access to vast resources that control the flow of information and restrict the access to the internet, in order to control the population~\cite*{aryan2013internet, zittrain2017shifting, alimardani2018internet}. 
 
 To protect these populations and ensure their access to freedom of speech and information, `anonymity networks' are systems designed to preserve user anonymity while protecting their privacy and security. 
-Authoritarian regimes intensify their efforts to restrict and control their population access by employing advanced techniques. 
+As authoritarian regimes intensify their efforts to restrict and control their population access by employing advanced techniques, these networks are becoming increasingly important to protect the privacy and security of users, as well as the privacy and anonymity guarantees offered by these networks.
 Consequently, these networks are becoming increasingly important to protect the privacy and security of users, as well as the privacy and anonymity guarantees offered by these networks.
 
 These regimes resort to the use of traffic analysis techniques to passively monitor the traffic and infer information about the users, in order to enforce and control the network and their users. 
 Traffic analysis attacks are a significant threat to anonymity networks, as they can be used to infer users' activities and deny their privacy, as well as de-anonymize them~\cite*{chakravarty2014trafficanalysis, winter2012great, robjansen2019dosontor}.
-Some have demonstrated that advances in machine learning lead to more sophisticated and effective traffic correlation attacks~\cite*{DeepCorr, TorMarker, TirDeanon}, such as DeepCoFFEA~\cite{DeepCoFFEA} and FINN~\cite{FINN}, which leverage deep learning techniques to correlate traffic patterns and infer users' activities with high accuracy, in anonymity networks like Tor~\cite{johnson2013users}.
+Researchers have demonstrated that advances in machine learning lead to more sophisticated and effective traffic correlation attacks~\cite*{DeepCorr, TorMarker, TirDeanon}, such as DeepCoFFEA~\cite{DeepCoFFEA} and FINN~\cite{FINN}, which leverage deep learning techniques to correlate traffic patterns and infer users' activities with high accuracy, in anonymity networks like Tor~\cite{johnson2013users}.
 Fingerprinting attacks also represent a major threat, as they enable attackers to infer information about users' online activities—even in encrypted traffic—by eavesdropping and collecting side-channel information between the user and the entry node.
 Using this information, an attacker can apply machine learning techniques to infer a user's online activities—such as visited websites—by analyzing traffic patterns with high accuracy~\cite*{DeepFingerprinting, TikTok, OnlineWebFingerprinting}.
 
@@ -53,21 +53,21 @@ In this manner, we reinforce the Tor end-to-end communication anonymity guarante
 
 \subsection{Expected Contributions}\label{sub:contributions}
 
-To address the stated goal, we produce the following contributions\footnote{The dissertation effort is planned as a research project task within NOVA LINCS (Nova Laboratory of Informatics and Computer Science), Computer Systems Research Group. The elaboration phase will involve integrating the expected contributions with collaborative engagement and follow-up of two PhD students: João Afonso Vilalonga and Hugo Gamaliel Pereira.}:
+To address the stated goal, we made the following contributions\footnote{The dissertation effort was planned as a research project task within NOVA LINCS (Nova Laboratory of Informatics and Computer Science), Computer Systems Research Group. The elaboration phase involved integrating the expected contributions with collaborative engagement and follow-up of two PhD students: João Afonso Vilalonga and Hugo Gamaliel Pereira.}:
 
 \begin{enumerate}
     \item Definition and formalization of the system design model to incorporate differentially private-based circuits as a possible interesting solution for Tor relay nodes to improve Tor anonymity conditions against traffic fingerprinting and correlation attacks;
 
     \item Specification of the software architecture and modular components for the engineering effort using Differential Privacy-based mechanisms and related components in extended Tor nodes;
    
-    \item Prototyping of the proposed solution where the implemented nodes will be used in a validation test bench and publishing the prototype in open-source for the possible use of interested researchers and practitioners;
+    \item Prototyping of the proposed solution where the implemented nodes were used in a validation test bench and publishing the prototype in open-source for the possible use of interested researchers and practitioners;
    
     \item Validation of the designed solution and prototype considering three main pillars: (\emph{i}) Development of formal security proofs behind the designed solution; (\emph{ii}) conduct an extensive experimental on performance indicators including communication latency, throughput, as well as resources' usage for running the proposed nodes, and (\emph{iii}) experimental observation of the unobservability properties of the designed solution against traffic correlation and fingerprinting techniques. 
    
 \end{enumerate}
 
-In the final validation effort, we obtained comparative metrics using a test bench that compared our designed solution with the existing Tor network and current Tor relay nodes.
+In the final validation effort, we obtained comparative metrics using a test bench that compared our solution with the existing Tor network and relay nodes.
 
 
 \section{Report Organization}\label{sec:report_organization}
-The remainder of this report is organized as follows: Chapter~\ref{cha:related_work} introduces anonymity networks, Tor and Differential Privacy, as well as some other related topics. The proposal of work is presented on Chapter~\ref{cha:system_model}, which provides some system model and guidelines for the development and discusses the proof method to verify the work. Then, we explore the implementation details, techniques and technologies used to develop the proposed solution in Chapter~\ref{cha:implementation}. Chapter~\ref{cha:evaluation} presents the evaluation of the proposed solution, including the experimental setup, performance evaluation, and security analysis. Finally, we conclude the report in Chapter~\ref{cha:conclusion}, summarizing the main findings and contributions of this work, and suggesting directions for future research.
+The remainder of this report is organized as follows: Chapter~\ref{cha:related_work} introduces anonymity networks, Tor and Differential Privacy, as well as some other related topics. The proposal of work is presented on Chapter~\ref{cha:system_model}, which provides some system model and guidelines for the development and discusses the proof method to verify the work. Then, we explore the implementation details, techniques and technologies used to develop the proposed solution in Chapter~\ref{cha:implementation}. Chapter~\ref{cha:validation} presents the evaluation of the proposed solution, including the experimental setup, performance evaluation, and security analysis. Finally, we conclude the report in Chapter~\ref{cha:conclusions}, summarizing the main findings and contributions of this work, and suggesting directions for future research.
