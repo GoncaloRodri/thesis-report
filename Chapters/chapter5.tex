@@ -94,7 +94,8 @@ Below we share the throughput results obtained from our experiments and accordin
 \end{figure}
 
 As shown in~\autoref{fig:local_throughput} and~\autoref{fig:dist_throughput}, the PPC feature has a more significant impact on throughput than the Schedulers feature. 
-This impact has greater impact as $\epsilon_{PPC}$ decrease, reaches a plateau when $\epsilon_{PPC}$ is greater than 4. The distributed test bench showed more unstable results, but the overall trend is similar. The Schedulers feature has a smaller impact on throughput, with a slight decrease for $\epsilon_{J}$ values closer to 0. Unexpectedly, in the local emulated test bench, the Exponential distribution increases its variance on tests with $\epsilon_{J}$ greater than 1, which corresponded with a slight degradation in throughput. 
+This impact has greater impact as $\epsilon_{PPC}$ decrease, reaches a plateau when $\epsilon_{PPC}$ is greater than 4. The distributed test bench showed more unstable results, but the overall trend is similar. The Schedulers feature has a smaller impact on throughput, with a slight decrease for $\epsilon_{J}$ values closer to 0. A notable anomaly was observed in the local emulated test bench: for $\epsilon_{J}$ values greater than 1, the throughput results exhibited increased statistical variance and a slight degradation in performance when using the Exponential distribution. This suggests that at lower privacy levels (higher $\epsilon$), the scheduling delays introduced by this specific distribution may create contention or inefficiencies not present with other distributions.
+
 In all experiments, all types schedulers behaved similarly.
 For the experiments with both features enabled, the results emphasized the greater impact of the PPC feature on throughput. The heatmap clearly shows that the throughput only oscillate vertically, but remain consistent across different $\epsilon_{J}$ values.
 
@@ -357,7 +358,7 @@ The most precise models were the \texttt{XGBoost}, \texttt{Extra Trees} and \tex
 
 \subsubsection{Recall}
 
-As shown in~\autoref{fig:models_recall_comparision}, the recall results are very similar to the accuracy across all models scenarios, which can indicate that models' performance is close to random guessing. Akin to accuracy, the best model is \texttt{XGBoost}, followed by \texttt{Random Forest} and \texttt{Extra Trees}, and the \texttt{Packet Padding Cells} scenario proves to have the highest values of recall.
+As shown in~\autoref{fig:models_recall_comparision}, the recall results closely mirror the accuracy findings across all scenarios. This parity suggests that the models are not systematically failing to identify true positives, but rather that the overall predictive power is low, approaching the performance of random guessing. This outcome is desirable, as it indicates the absence of reliable patterns for the classifiers to exploit. Akin to accuracy, the best model is \texttt{XGBoost}, followed by \texttt{Random Forest} and \texttt{Extra Trees}, and the \texttt{Packet Padding Cells} scenario proves to have the highest values of recall.
 
 
 \begin{figure}[!h]
@@ -385,7 +386,9 @@ An algorithm satisfies Differential Privacy if, for any two adjacent datasets (d
 
 Our solution introduces two key mechanisms to achieve Differential Privacy: Packet Padding Cells, which vary the size of TLS packets, and the Jitter Injection Schedulers, which vary the time intervals between TLS Packets. This way, we consider two datasets as adjacent if they differ by a single packet size or a single time interval, respectively.
 
-The first mechanism, Packet Padding Cells, modifies the size of TLS packets by adding dummy data, which provides irreversible privacy to the TLS packets sizes, through the Post Processing property, thereby creating a set of possible packet sizes (size sets). This feature ensures that the probability of observing a particular packet size remains similar, regardless of whether a specific packet is present or absent in the dataset, with the use of a randomized response algorithm, such as~\autoref{lst:randomized_response}. 
+The first mechanism, Packet Padding Cells, modifies the size of TLS packets by adding dummy data, which provides irreversible privacy to the TLS packets sizes, through the Post Processing property, thereby creating a set of possible packet sizes (size sets).
+This mechanism is an application of the randomized response technique~\autoref{lst:randomized_response}. By probabilistically adding dummy cells, we alter the original dataset of packet sizes. Formally, this ensures that the likelihood of observing any particular packet size is sufficiently similar regardless of wheter an individual, true data packet is included in the transmission. This obfuscation provides a quantifiable privacy guarantee against adversaries attempting to infer activity from packet sizes.
+
 More formally, for any two adjacent datasets $D$ and $D'$, and for any possible output $S$ (a specific packet size), the following condition holds:
 \[P(F(D) \in S) \leq e^{\epsilon} \cdot P(F(D') \in S)\]
 
