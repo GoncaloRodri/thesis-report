@@ -325,17 +325,14 @@ We consider a true positive if the model correctly identifies a website, a true 
 
 \subsection{Experimental Observations}\label{sec:experimental_observations_unobservability}
 
-In this section, we present the results of our unobservability evaluation, focusing on the performance of the machine learning models in identifying websites based on the collected traces. We conducted experiments using different configurations of our system, varying the $\epsilon$ values for both the Packet Padding Cells feature and the Schedulers feature. To ease the understanding the performance of each model and each configuration, we present the results in tables and by metric, with 4 test scenarios: control (without any feature), only Packet Padding Cells feature with minimum $\epsilon$ value, only Schedulers feature with minimum $\epsilon$ value and both features with minimum $\epsilon$ values. 
+In this section, we present the results of our unobservability evaluation, focusing on the performance of the machine learning models in identifying websites based on the collected traces. We conducted experiments using different configurations for our system, varying the $\epsilon$ values for both the Packet Padding Cells feature and the Schedulers feature. To ease the understanding of the performance of each model and each configuration, we present the results in bar plots for each metric, contemplating 4 test scenarios: (i) \textit{Control}: traces collected from a network of original Tor nodes, with not use of Packet Padding Cells and using a KIST scheduler without any jitter induction; (ii) \textit{Packet Padding Cells}: traces collected using a network with our prototype version with only the PPC features and with maximum generation ratio of false cells ($\epsilon_{PPC} = 0$); (iii) \textit{Jitter Induction Schedulers} similar to the previous scenario but with resort to a KIST enhanced scheduler with the Poisson distribution and maximum jitter conditions generated ()$\epsilon_{J} = 0.0001$; and (IV) \textit{Both Features}: traces collected using the minimum privacy parameter values possible for both features originating in a scenario with maximum jitter and maximum false cells' ratio. 
 
 The first scenario is used to set a comparison between the already existing Tor software against the solution presented. The second and third scenarios were designed to isolate the impact of each feature on unobservability. The final scenario, which combines both features, allows for an analysis of their synergistic effects and an assessment of whether their interaction could inadvertently degrade the desired unobservability properties.
-
-This way, we can better understand the impact of each feature on the resistance against website fingerprinting attacks, as well as the combined effect of both features.
-
-To present the results, we split them by evaluation metric and with a bar plot, with a group of bars for each machine learning model, where the groups are composed by 4 bars, corresponding to the used test scenarios.
+This method allows a better understanding of the impact of each feature on the resistance against website fingerprinting attacks, as well as the combined effect of both features.
 
 \subsubsection{Accuracy}
 
-The bar plot in~\autoref{fig:models_accuracy_comparision} presents the performance of all models under the four test scenarios. The \texttt{Packet Padding Cells} feature alone presented the overall highest values, specially under the \texttt{XGBoost} model. On the other hand, both scenarios with only the modified schedulers and with both features, showed very similar results across all models, demonstrating the effectiveness of the Jitter Induction Mechanism over Tor Schedulers and that the features do not negatively impact each other when combined, even though some models achieved better accuracy on both features than only the modified scheduler.
+The bar plot in~\autoref{fig:models_accuracy_comparision} presents the performance of all models under the four test scenarios. The \textit{Packet Padding Cells} feature alone presented the overall highest values, specially under the \texttt{XGBoost} model. On the other hand, both scenarios with only the modified schedulers and with both features, showed very similar results across all models, demonstrating the effectiveness of the Jitter Induction Mechanism over Tor Schedulers and that the features do not negatively impact each other when combined, even though some models achieved better accuracy on both features than only the modified scheduler. Unexpectably, the control scenario presented the lowest accuracy values, which might indicate that our solution degrades Tor's unobservability.
 The most accurate models were the \texttt{XGBoost}, \texttt{Random Forest} and \texttt{Extra Trees}.
 
 \begin{figure}[!h]
@@ -343,11 +340,11 @@ The most accurate models were the \texttt{XGBoost}, \texttt{Random Forest} and \
   \includegraphics[width=\textwidth]{Chapters/Figures/Plots/obs_Accuracy_comparison.png}
   \caption{Comparison of models' accuracy}\label{fig:models_accuracy_comparision}
 \end{figure}
-
+\FloatBarrier
 
 \subsubsection{Precision}
 
-The bar plot in~\autoref{fig:models_precision_comparision} shows the precision of Machine Learning models over the referred testing scenarios. The results were tightly coupled with the accuracy results, were the most accurate models correspond to the most precise, specially over the Packet Padding Cells scenario. Once again, the higher precision over this scenario proves it to be the less effective against machine learning algorithms. Moreover, the other scenarios show both similar and lower precision values.
+The bar plot in~\autoref{fig:models_precision_comparision} shows the precision of Machine Learning models over the referred testing scenarios. The results were tightly coupled with the accuracy results, were the most accurate models correspond to the most precise, specially over the Packet Padding Cells scenario. Once again, the higher precision over this scenario proves it to be the less effective against machine learning algorithms. Moreover, the other scenarios show both similar and lower precision values. It is also important to note that the overall precision values are very low, indicating that the models struggle to correctly identify websites, which is a positive outcome in the context of unobservability or might suggest that the collected traces were insufficient to train the models effectively.
 The most precise models were the \texttt{XGBoost}, \texttt{Extra Trees} and \texttt{Logistic Regression}
 
 \begin{figure}[!h]
@@ -355,10 +352,11 @@ The most precise models were the \texttt{XGBoost}, \texttt{Extra Trees} and \tex
   \includegraphics[width=\textwidth]{Chapters/Figures/Plots/obs_Precision_comparison.png}
   \caption{Comparison of models' precision}\label{fig:models_precision_comparision}
 \end{figure}
+\FloatBarrier
 
 \subsubsection{Recall}
 
-As shown in~\autoref{fig:models_recall_comparision}, the recall results closely mirror the accuracy findings across all scenarios. This parity suggests that the models are not systematically failing to identify true positives, but rather that the overall predictive power is low, approaching the performance of random guessing. This outcome is desirable, as it indicates the absence of reliable patterns for the classifiers to exploit. Akin to accuracy, the best model is \texttt{XGBoost}, followed by \texttt{Random Forest} and \texttt{Extra Trees}, and the \texttt{Packet Padding Cells} scenario proves to have the highest values of recall.
+As shown in~\autoref{fig:models_recall_comparision}, the recall results closely mirror the accuracy findings across all scenarios. This parity suggests that the models are not systematically failing to identify true positives, but rather that the overall predictive power is low, approaching the performance of random guessing. This outcome is desirable, as it indicates the absence of reliable patterns for the classifiers to exploit. Akin to accuracy, the best model is \texttt{XGBoost}, followed by \texttt{Random Forest} and \texttt{Extra Trees}, and the \textit{Packet Padding Cells} scenario proves to have the highest values of recall.
 
 
 \begin{figure}[!h]
@@ -366,17 +364,18 @@ As shown in~\autoref{fig:models_recall_comparision}, the recall results closely 
   \includegraphics[width=\textwidth]{Chapters/Figures/Plots/obs_Recall_comparison.png}
   \caption{Comparison of models' recall}\label{fig:models_recall_comparision}
 \end{figure}
+\FloatBarrier
 
 \subsubsection{F1-Score}
 
-Finally, the bar plot in~\autoref{fig:models_f1score_comparision} demonstrates the results of F1-Score of the experiments. Similarly to the previous metrics, the \texttt{Packet Padding Cells} feature achieved higher values compared with the other test cases. The best performant models, regarding F1-Score, were the \texttt{XGBoost}, \texttt{Random Forest} and \texttt{Extra Trees}.
+Finally, the bar plot in~\autoref{fig:models_f1score_comparision} demonstrates the results of F1-Score of the experiments. As expected from the previous metrics, the overall results of F1-Score are low, indicating that the models struggle to effectively identify websites based on the collected traces. The \textit{Packet Padding Cells} feature achieved higher values compared with the other test cases, and the best performant models, regarding F1-Score, were the \texttt{XGBoost}, \texttt{Random Forest} and \texttt{Extra Trees}.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\textwidth]{Chapters/Figures/Plots/obs_F1 Score_comparison.png}
   \caption{Comparison of models' F1-Score}\label{fig:models_f1score_comparision}
 \end{figure}
-
+\FloatBarrier
 
 \section{Formal Validation}\label{sec:formal_validation}
 
@@ -387,7 +386,7 @@ An algorithm satisfies Differential Privacy if, for any two adjacent datasets (d
 Our solution introduces two key mechanisms to achieve Differential Privacy: Packet Padding Cells, which vary the size of TLS packets, and the Jitter Injection Schedulers, which vary the time intervals between TLS Packets. This way, we consider two datasets as adjacent if they differ by a single packet size or a single time interval, respectively.
 
 The first mechanism, Packet Padding Cells, modifies the size of TLS packets by adding dummy data, which provides irreversible privacy to the TLS packets sizes, through the Post Processing property, thereby creating a set of possible packet sizes (size sets).
-This mechanism is an application of the randomized response technique~\autoref{lst:randomized_response}. By probabilistically adding dummy cells, we alter the original dataset of packet sizes. Formally, this ensures that the likelihood of observing any particular packet size is sufficiently similar regardless of wheter an individual, true data packet is included in the transmission. This obfuscation provides a quantifiable privacy guarantee against adversaries attempting to infer activity from packet sizes.
+This mechanism is an application of the randomized response technique~\autoref{lst:randomized_response}. By probabilistically adding dummy cells, we alter the original dataset of packet sizes. Formally, this ensures that the likelihood of observing any particular packet size is sufficiently similar regardless of whether an individual, true data packet is included in the transmission. This obfuscation provides a quantifiable privacy guarantee against adversaries attempting to infer activity from packet sizes.
 
 More formally, for any two adjacent datasets $D$ and $D'$, and for any possible output $S$ (a specific packet size), the following condition holds:
 \[P(F(D) \in S) \leq e^{\epsilon} \cdot P(F(D') \in S)\]
@@ -436,11 +435,11 @@ The tests demonstrated that the PPC feature impacts total time and throughput as
 The collected measures over the number of false cells confirmed that the creation of these types of cells increases TLS on a random and non-regular distribution, altering and randomizing traffic characteristics against machine learning algorithms.
 
 % Resume Unobservability Results
-Regarding the unobservability evaluation, we collected 5 000 website traces for each test scenario and used such traces to train and evaluate a set of 9 machine learning models to simulate website fingerprinting attacks. In total, we considered 4 test scenarios: a control scenario without any implemented feature, a PPC scenario only with this feature and another Scheduler scenario only with the modified schedulers, and finally a scenario with both features. The results showed that the PPC feature provided less unobservability compared to using only the scheduler or both features, and combining both features did not reduce their individual effectiveness.
+Regarding the unobservability evaluation, we collected 5 000 website traces for each test scenario and used such traces to train and evaluate a set of 9 machine learning models to simulate website fingerprinting attacks. In total, we considered 4 test scenarios: a control scenario without any implemented feature, a PPC scenario only with this feature and another Scheduler scenario only with the modified schedulers, and finally a scenario with both features. Even though the results showed that the PPC feature provided less unobservability compared to using only the scheduler or both features, the overall results of all scenarios were very low, indicating that either the models struggled to effectively identify websites based on the collected traces, and therefore proving not only that our solution provides great unobservability properties, but also that the original Tor software already provides great unobservability properties, but it might also mean that the collected traces were insufficient to train the models effectively. Additionally, it is also worth mentioning that the results demonstrated that the combination of both features did not reduce their individual effectiveness, indicating that they can be used together without compromising unobservability.
 
 % Resume Formal Validation Results
 The formal validation demonstrated that Packet Padding Cells and Jitter Induction Schedulers features modify the TLS packets size and time intervals between packets, respectively, which contain Differential Privacy properties. The PPC features is able to provide such properties due to a randomized response algorithm and by generating false cells and altering the TLS packet sizes between the different circuit segments. The Jitter Induction Schedulers were able to provide these properties by using mathematical distributions to generate pseudo-random numbers to define the time intervals between TLS packets over the different circuit segments. Nevertheless, users must account for privacy loss. The long use of these features can reduce the privacy guarantees to eventually none.
 
 % Add conclusion over the results
-In conclusion, the experimental evaluation and validation demonstrate that the proposed solution effectively strengthens Tor's unobservability properties while ensuring Differential Privacy guarantees, without incurring performance degradation severe enough to render the system impractical.
+In conclusion, the experimental evaluation and validation demonstrate that the proposed solution provides unobservability properties while ensuring Differential Privacy guarantees, without incurring performance degradation severe enough to render the system impractical.
 
