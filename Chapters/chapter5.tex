@@ -391,6 +391,11 @@ Our solution introduces two key mechanisms to achieve Differential Privacy: Pack
 The first mechanism, Packet Padding Cells, modifies the size of TLS packets by adding dummy data, which provides irreversible privacy to the TLS packets sizes, through the Post Processing property, thereby creating a set of possible packet sizes (size sets).
 This mechanism is an application of the randomized response technique as described in~\autoref{subsec:local_differential_privacy}, which was inspired in a algorithm where a subject answers a sensitive question truthfully with probability $p$ and answers with a random answer otherwise, ensuring that no answer could be taken as truthfully or not, and offering Local Differential Privacy~\cite{RandomizedResponse, AlgFoundationsDP}.
 
+% TODO: Add graph with probabilistic distribution based on epsilon value
+
+% TODO: Relate graph curve with the performance resuls
+
+
 By probabilistically adding dummy cells, we alter the original dataset of packet sizes. Formally, this ensures that the likelihood of observing any particular packet size is sufficiently similar regardless of whether an individual, true data packet is included in the transmission. This obfuscation provides a quantifiable privacy guarantee against adversaries attempting to infer activity from packet sizes.
 
 More formally, for any two adjacent datasets $D$ and $D'$, and for any possible output $S$ (a specific packet size), the following condition holds:
@@ -424,7 +429,13 @@ The second mechanism, Jitter Injection Schedulers, introduces variability in the
 
 In this context, $F$ represents the randomized function that adds jitter to packet transmissions. Moreover, given $f$ as the function that givens default time interval between packets, we can define $F$ as:
 \[F(D) = f(D) + \text{Poisson}(\lambda)\]
-where $\text{Poisson}(\lambda)$ is a random variable drawn from a Poisson distribution with parameter $\lambda$~\cite{DP_Book, AlgFoundationsDP}. In the mentioned works in~\autoref{sec:differential_privacy}, it is demonstrated that mechanisms using mathematical distributions, such as Laplace, achieve $\epsilon$-Differential Privacy. In our case, we adapted the Poisson distribution to generate the random delays, which also satisfies $\epsilon$-Differential Privacy, due to issues with the Laplace distribution implementation and configuration in C. However, there are other mathematical distributions that can be used by our solution, such as the Exponential and Normal distributions.
+where $\text{Poisson}(\lambda)$ is a random variable drawn from a Poisson distribution with parameter $\lambda$~\cite{DP_Book, AlgFoundationsDP}. 
+
+% TODO: Add graph with probabilistic distribution based on epsilon value
+
+% TODO: Relate graph curve with the performance resuls
+
+In the mentioned works in~\autoref{sec:differential_privacy}, it is demonstrated that mechanisms using mathematical distributions, such as Laplace, achieve $\epsilon$-Differential Privacy. In our case, we adapted the Poisson distribution to generate the random delays, which also satisfies $\epsilon$-Differential Privacy, due to issues with the Laplace distribution implementation and configuration in C. However, there are other mathematical distributions that can be used by our solution, such as the Exponential and Normal distributions.
 
 This implemenation showed very promissing results in both performance and unobservability evaluations, as presented in~\autoref{sec:performance_evaluation} and~\autoref{sec:unobservability_evaluation}, respectively. On contrary to the state regarding the PPC implemenation, the throughput and total time results remained significantly unaltered throughout various $\epsilon$ values, and only demonstrating an exponential increase in latency when approaching $\epsilion$ near 0. Regarding the unobservability evaluation, this feature also demonstrated to be very effective against website fingerprinting attacks, achieving very low values across all metrics and models, as presented in~\autoref{sec:unobservability_evaluation}, specially when compared with the results from the PPC feature.
 
