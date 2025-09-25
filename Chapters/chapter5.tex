@@ -389,12 +389,7 @@ An algorithm satisfies Differential Privacy if, for any two adjacent datasets (d
 Our solution introduces two key mechanisms to achieve Differential Privacy: Packet Padding Cells, which vary the size of TLS packets, and the Jitter Injection Schedulers, which vary the time intervals between TLS Packets. This way, we consider two datasets as adjacent if they differ by a single packet size or a single time interval, respectively.
 
 The first mechanism, Packet Padding Cells, modifies the size of TLS packets by adding dummy data, which provides irreversible privacy to the TLS packets sizes, through the Post Processing property, thereby creating a set of possible packet sizes (size sets).
-This mechanism is an application of the randomized response technique as described in~\autoref{subsec:local_differential_privacy}, which was inspired in a algorithm where a subject answers a sensitive question truthfully with probability $p$ and answers with a random answer otherwise, ensuring that no answer could be taken as truthfully or not, and offering Local Differential Privacy~\cite{RandomizedResponse, AlgFoundationsDP}.
-
-% TODO: Add graph with probabilistic distribution based on epsilon value
-
-% TODO: Relate graph curve with the performance resuls
-
+This mechanism is an application of the randomized response technique as described in~\autoref{subsec:local_differential_privacy}, which was inspired in an algorithm where a subject answers a sensitive question truthfully with probability $p$ and answers with a random answer otherwise, ensuring that no answer could be taken as truthfully or not, and offering Local Differential Privacy~\cite{RandomizedResponse, AlgFoundationsDP}.
 
 By probabilistically adding dummy cells, we alter the original dataset of packet sizes. Formally, this ensures that the likelihood of observing any particular packet size is sufficiently similar regardless of whether an individual, true data packet is included in the transmission. This obfuscation provides a quantifiable privacy guarantee against adversaries attempting to infer activity from packet sizes.
 
@@ -403,7 +398,19 @@ More formally, for any two adjacent datasets $D$ and $D'$, and for any possible 
 
 In this context, $F$ represents the randomized response function that adds padding to packets, which satisfies $\epsilon$-Differential Privacy. 
 
-This feature demonstrated very interessting results in both performance and unobservability evaluations, as presented in~\autoref{sec:performance_evaluation} and~\autoref{sec:unobservability_evaluation}, respectively. The feature equipped with this randomized response mechanism showed to have no impact on the latency of the network across all the tested $\epsilon$ values, and only demonstrating an exponential increase in throughput and total time when approaching $\epsilion$ near 0. Regarding the unobservability evaluation, this feature demonstrated to be less efective obfuscating traffic patterns against machine learning algorithms, specially when compared with the results from the Jitter Injection Schedulers feature. However, the results were still very low across all metrics and models, meaning that this feature can also be considirered as effective.
+This feature demonstrated very interesting results in both performance and unobservability evaluations, as presented in~\autoref{sec:performance_evaluation} and~\autoref{sec:unobservability_evaluation}, respectively. The feature equipped with this randomized response mechanism showed to have no impact on the latency of the network across all the tested $\epsilon$ values, and only demonstrating an exponential increase in throughput and total time when approaching $\epsilion$ near 0. Regarding the unobservability evaluation, this feature demonstrated to be less effective obfuscating traffic patterns against machine learning algorithms, specially when compared with the results from the Jitter Injection Schedulers feature. However, the results were still very low across all metrics and models, meaning that this feature can also be considered as effective.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapters/Figures/Plots/rr_stats.png}
+    \caption{Probability of Randomized Response for multiple $\epsilon$}\label{fig:randomized_response_stats}
+\end{figure}
+
+The~\autoref{fig:randomized_response_stats} shows the probability of generation a false cell based on the value of $\epsilon$. As observed, the probability of generating a false cell decreases as $\epsilon$ increases, with a maximum probability of 0.5 when $\epsilon = 0$. This means that when $\epsilon$ is set to 0, there is a 50\% chance of generating a false cell, leading to the highest level of obfuscation. For $\epsilon$ values bigger than 5, the probability of generating a false cell becomes very low, approaching 0. Both this aspect and the probability distribution can be correlated with the pattern of both throughput and total time results presented in~\autoref{sec:performance_evaluation} for the Packet Padding Cells feature. To safely provide privacy, we recommend a minimum value of $\epsilon = 2.5$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% JITTER %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The second mechanism, Jitter Injection Schedulers, introduces variability in the timing of packet transmissions by adding random delays (delta sets). This feature leverages mathematical distributions, such as~\autoref{lst:poisson_distribution} to generate differential private time intervals, ensuring that the timing of packet transmissions does not reveal information about the presence or absence of specific packets. Formally, for any two adjacent datasets $D$ and $D'$, and for any possible output $T$ (a specific time interval), the following condition holds:
 \[P(F(D) \in T) \leq e^{\epsilon} \cdot P(F(D') \in T)\]
@@ -431,14 +438,24 @@ In this context, $F$ represents the randomized function that adds jitter to pack
 \[F(D) = f(D) + \text{Poisson}(\lambda)\]
 where $\text{Poisson}(\lambda)$ is a random variable drawn from a Poisson distribution with parameter $\lambda$~\cite{DP_Book, AlgFoundationsDP}. 
 
-% TODO: Add graph with probabilistic distribution based on epsilon value
-
-% TODO: Relate graph curve with the performance resuls
 
 In the mentioned works in~\autoref{sec:differential_privacy}, it is demonstrated that mechanisms using mathematical distributions, such as Laplace, achieve $\epsilon$-Differential Privacy. In our case, we adapted the Poisson distribution to generate the random delays, which also satisfies $\epsilon$-Differential Privacy, due to issues with the Laplace distribution implementation and configuration in C. However, there are other mathematical distributions that can be used by our solution, such as the Exponential and Normal distributions.
 
-This implemenation showed very promissing results in both performance and unobservability evaluations, as presented in~\autoref{sec:performance_evaluation} and~\autoref{sec:unobservability_evaluation}, respectively. On contrary to the state regarding the PPC implemenation, the throughput and total time results remained significantly unaltered throughout various $\epsilon$ values, and only demonstrating an exponential increase in latency when approaching $\epsilion$ near 0. Regarding the unobservability evaluation, this feature also demonstrated to be very effective against website fingerprinting attacks, achieving very low values across all metrics and models, as presented in~\autoref{sec:unobservability_evaluation}, specially when compared with the results from the PPC feature.
+This implementation showed very promising results in both performance and unobservability evaluations, as presented in~\autoref{sec:performance_evaluation} and~\autoref{sec:unobservability_evaluation}, respectively. On contrary to the state regarding the PPC implementation, the throughput and total time results remained significantly unaltered throughout various $\epsilon$ values, and only demonstrating an exponential increase in latency when approaching $\epsilion$ near 0. Regarding the unobservability evaluation, this feature also demonstrated to be very effective against website fingerprinting attacks, achieving very low values across all metrics and models, as presented in~\autoref{sec:unobservability_evaluation}, specially when compared with the results from the PPC feature.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapters/Figures/Plots/epsilon_stats.png}
+    \caption{Possible samples of Poisson Distribution for multiple $\epsilon$}\label{fig:poisson_distribution}
+\end{figure}
+
+As illustrated in~\autoref{fig:poisson_distribution}, the Poisson distribution generates random delays that vary based on the value of $\epsilon$. This illustration highlights how the choice of $\epsilon$ influences the distribution of delays, with a maximum delay of 10 ms, set as a maximum in our implementation using the configurable upper bound parameter \texttt{PrivSchedulerMaxJitter}, and with a minimum of 2 ms, also set as the target parameter \texttt{PrivSchedulerTargetJitter}. It is important to note that that behavior of the jitter generation is influenced by the chosen mathematical distribution and its parameters, which can be adjusted to meet specific privacy and performance requirements. In the performed tests to understand the jitter generation behavior, we observed that the results of a not clamped Poisson distribution, with $\epsilon < 1$, could generate very high values, between 100 and 50 ms, which represent a significant delay in the context of Tor communications and in performance. To prevent this, we implemented the clamping of the generated values with the configured parameter to ensure that they remain within a reasonable range, according to the user considered maximum desired time interval and thus avoiding excessive delays. Also, this distribution becomes almost irrelevant when $\epsilon > 4$, as the generated values are very close to the target value, justifying as well the performance behavior observed in~\autoref{sec:performance_evaluation}.
+
+Given this information, we recommend using $0 < \epsilon \leq 3$ to ensure privacy and carefully selecting the target and upper bound parameters to balance privacy and performance effectively. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% BOTH %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Both features must be carefully used to ensure minimal privacy loss, as the total privacy cost of multiple differentially private mechanisms is the sum of their individual privacy costs, according to the Sequential Composition theorem. Therefore, if both features are applied to the same dataset, the overall privacy guarantee is given by:
 \[P(F(D) \in G) \leq e^{\epsilon_1 + \epsilon_2} \cdot P(F(D') \in G)\]
