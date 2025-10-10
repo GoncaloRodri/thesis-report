@@ -106,7 +106,7 @@ After cloning the repository, you may also clone into the repository the one we 
 Before running the Tor network, you must install the needed dependencies. One of the biggest dependencies is \texttt{Docker}, which we recommend you to install using the official documentation\footnote{\url{https://docs.docker.com/engine/install/}}. To run the \textit{Tester} script, you will need to run the following:
 \begin{lstlisting}[language=bash]
   $ apt install jq curl ssh openssl-devel-engine
-  $ snap install yq # package yq from apt may have compactability issues
+  $ snap install yq # package yq from apt may cause compactability issues
 \end{lstlisting}
 
 By using \textit{Docker}, it is not necessary to install all Tor's dependencies, as they are already included in the \textit{Docker} image. After installing all the needed dependencies, now we can deploy the Tor network with our solution and perform any testing that you may consider adequate.
