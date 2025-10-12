@@ -42,7 +42,7 @@ It is also important to note that the time intervals is only set after the sched
 By extending the \texttt{relay.c} file, which handles cell encryption and decryption, packaging and receiving from circuits and queuing on circuits, we were able to implement the Packet Padding Cells feature. We modified the \texttt{circuit\_receive\_relay\_cell} function by adding an extra step after successfully queuing a received cell, where accordingly with a given probability, a new cell with a random payload is created and enqueued in the same circuit queue of the original cell. This probability is defined by the \texttt{DummyCellEpsilon} configuration parameter which then is used to generate a differential private boolean, using the \texttt{dp\_generate\_bool} function, to decide whether to create a new cell or not.  
 
 Our library gives Tor source code the possibility to  generate pseudo-random decisions and numbers, using Differential Privacy and mathematical distributions. At the moment of writing, the library supports the \textit{Laplace}, \textit{Poisson}, \textit{Exponential}, \textit{Uniform} and \textit{Normal} distributions for generating pseudo-random numbers, and the Randomized Response algorithm for generating pseudo-random decisions, as showed in~\autoref{lst:randomized_response}.
-\begin{lstlisting}[language=C, caption={Randomized Response algorithm implementation.}, label={lst:randomized_response}]
+\begin{lstlisting}[language=C, caption={Randomized Response algorithm implementation.}, label={lst:randomized_response}, float]
   bool randomized_response(bool true_value, double epsilon)
   {
     if (epsilon < 0.0) {
@@ -75,7 +75,7 @@ To successfully extend the Tor source coded and implement the abovementioned fea
 
 Our version of the source code, with both presented features, added two files in the \texttt{src/or/core} folder: \texttt{scheduler\_privacy\_kist.c}, \texttt{scheduler\_privacy\_vanilla.c}; and \texttt{dp\_mech.c} and \texttt{dp\_mech.h} in the \texttt{src/lib} folder. The first 2 files contain the implementation of the Jitter Induction Schedulers, with a total of 584 lines of code. The last 2 files contain the implementation of our random number generation library with a total 236 lines of code.
 
-In addition to the added files, the \texttt{src/or/core/relay.c} file was modified to implement the Packet Padding Cells feature, with an average of 121 added lines of code and 475 modified lines of code. We also modified the \texttt{src/or/config.c} and \texttt{src/or/or\_options\_st.h} files to extend the Tor configuration, with nearly 90 lines of code added or modified. 
+In addition to the added files, the \texttt{src/or/core/relay.c} file was modified to implement the Packet Padding Cells feature, with an average of 121 added lines of code and 475 modified lines of code. To extend the Tor configurations, we modified the \texttt{src/or/config.c} and \texttt{src/or/or\_options\_st.h} files, with nearly 90 lines of code added and modified. 
 
 Regarding the developed scripts, the \textit{Tester} script has around 640 lines of code out of 7 \textit{Bash} files, the \textit{Analyzer} script has 460 lines of code among 6 \textit{Python} files, and the \textit{Plotter} script has 416 lines of code out of 3 \textit{Python} files.
 
