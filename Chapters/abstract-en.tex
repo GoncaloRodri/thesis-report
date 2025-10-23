@@ -8,21 +8,17 @@
 
 \typeout{NT FILE abstract-en.tex}%
 
-The internet has become an indispensable tool for accessing information and exercising freedom of speech, a fundamental right that empowers individuals worldwide. However, authoritarian regimes and government agencies tend to suppress this right through surveillance and censorship activities. These efforts have become increasingly sophisticated, employing techniques such as traffic analysis attacks and advanced traffic correlation methods to monitor and undermine user anonymity.
+Anonymity Networks such as Tor have emerged as essential tools for safeguarding end-to-end online communication and combating censorship, serving millions of users worldwide. However, recent research has demonstrated that powerful state-level adversaries can potentially perform de-anonymization attacks using traffic correlation and web interaction fingerprinting techniques based on advanced machine and deep learning correlation models. This dissertation addresses these challenges by enhancing the Tor network's defenses against the aforementioned attacks. The primary objective is to propose a solution that improves the functionality of Tor relay nodes by leveraging the existing software architecture to support differentially private circuits—a mechanism for end-to-end enhanced privacy-preserving communication inspired by the principles of differential privacy. The proposed approach aims to achieve practical levels of throughput and latency suitable for real-world application scenarios, while providing users with adaptable and more resilient anonymity protection. 
 
-In response to the growing demand for secure and private communication, Anonymity Networks like Tor have emerged as essential tools for safeguarding online end-to-end communication and fighting censorship, which millions of people rely on daily. However, recent research demonstrated that potential de-anonymization attacks can be performed by powerful state-level adversaries by traffic correlation and fingerprinting using advanced deep machine learning techniques.
+At the core of the proposed design is the integration of carefully bounded random noise into traffic flows established within Tor circuits. This noise is introduced through a combination of randomized jitter and Tor-based fake cells within the onion-routing structure among relay nodes, reducing temporal and packet-size correlations that could be exploited by advanced machine learning-based adversaries. The overarching goal is to mitigate advanced traffic correlation and fingerprinting attacks, thereby enhancing the privacy guarantees of the Tor network. 
 
-This dissertation addresses these challenges by strengthening Tor network's defenses against the above-mentioned attacks. The main goal is to develop an innovative solution targeted to improve Tor relay nodes leveraging the existing software architecture by introducing formal privacy guarantees based on differentially private circuits. We expect that our proposed solution will maintain practical levels of throughput and latency for end-to-end communication, ensuring compatibility with real-world usage scenarios while providing users with adaptable and more robust anonymity protection.
-
-As stated above, the core of the proposed solution is the integration of Differential Privacy principles to dynamically introduce carefully bounded random noise into traffic flows, mitigating correlation attacks and empowering a better solution resilient against fingerprinting. 
-To the best of our knowledge, the expected dissertation contributions can represent a pioneering effort in incorporating Differential
-Privacy into the software architecture of Tor relay nodes. Moreover, the use of Differential Privacy will allow for a formally proven, scalable, and effective mechanism that bolsters online anonymity, resistant against state-of-the-art internet censorship techniques and upholding the fundamental right to free expression in an increasingly monitored digital world.
+To the best of our knowledge, the contributions of this dissertation represent a potentially significant step toward incorporating differential privacy into the software architecture of Tor relay nodes. Furthermore, the proposed differential privacy-inspired approach provides a formally grounded, scalable, and effective mechanism for enhancing online anonymity, offering increased resilience against state-of-the-art Internet censorship and surveillance techniques.
 
 \keywords{
     Anonymity Networks 
+    \and Tor Network
     \and Differential Privacy 
-    \and End-to-End Privacy Enhanced Guarantees 
     \and Privacy-Preserving Communication 
     \and Traffic Analysis Attacks
-    \and Traffic Correlation
+    \and Traffic Fingerprinting Avoidance
 }

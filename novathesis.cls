@@ -783,7 +783,7 @@
 % “biblatex” stuff
 %\ntaddfile{bib}{./NOVAthesisFiles/fix-bib.bib}%
 \letoptionlist{/@nt/biblatex}\@nt@biblatex@opts%
-\RequirePackage[hyperref=auto,defernumbers=true]{biblatex}%
+\RequirePackage[hyperref=auto,defernumbers=true,maxcitenames=1]{biblatex}%
 
 %--------------------------------
 % “hyperref” stuff

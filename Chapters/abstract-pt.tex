@@ -8,22 +8,18 @@
 
 \typeout{NT FILE abstract-pt.tex}%
 
+As Redes de Anonimato, como o Tor, têm emergido como ferramentas essenciais para salvaguardar a comunicação online ponto-a-ponto e combater a censura, servindo milhões de utilizadores em todo o mundo. Contudo, investigação recente tem demonstrado que adversários poderosos a nível estatal podem potencialmente realizar ataques de desanonimização, utilizando técnicas de correlação de tráfego e de fingerprinting de interação web baseadas em modelos avançados de correlação de aprendizagem automática e profunda. Esta dissertação aborda estes desafios através do reforço das defesas da rede Tor contra os ataques supracitados. O objetivo principal é propor uma solução que melhore a funcionalidade dos nós de reencaminhamento (relay nodes) do Tor, aproveitando a arquitetura de software existente para suportar circuitos diferencialmente privados — um mecanismo para comunicação ponto-a-ponto melhorada com preservação de privacidade, inspirado nos princípios da privacidade diferencial. A abordagem proposta visa alcançar níveis práticos de débito (throughput) e latência, adequados para cenários de aplicação reais, proporcionando simultaneamente aos utilizadores uma proteção de anonimato adaptável e mais resiliente.
 
-A Internet tornou-se uma ferramenta indispensável para aceder à informação e exercer a liberdade de expressão, um direito fundamental que confere poder aos indivíduos em todo o mundo. No entanto, os regimes autoritários e as entidades governamentais tendem a restringir este direito através de práticas de vigilância e censura. Estes esforços têm-se tornado cada vez mais sofisticados, recorrendo a técnicas como a análise de tráfego e métodos avançados de correlação de dados para monitorizar e comprometer o anonimato dos utilizadores.
+No cerne do design proposto está a integração de ruído aleatório cuidadosamente delimitado nos fluxos de tráfego estabelecidos nos circuitos Tor. Este ruído é introduzido através de uma combinação de jitter aleatório e células falsas baseadas no Tor dentro da estrutura de encaminhamento em cebola (onion-routing) entre os nós de reencaminhamento, reduzindo as correlações temporais e de tamanho de pacote que poderiam ser exploradas por adversários avançados baseados em aprendizagem automática. O objetivo geral é mitigar ataques avançados de correlação de tráfego e de fingerprinting, reforçando assim as garantias de privacidade da rede Tor.
 
-Em resposta à crescente necessidade de comunicações seguras e privadas, surgiram redes de anonimato como o Tor, que desempenham um papel essencial na proteção das comunicações online e na resistência à censura, das quais milhões de pessoas dependem diariamente. No entanto, investigações recentes demonstraram que ataques de desanonimização podem ser conduzidos por adversários poderosos a nível estatal, utilizando correlação de tráfego e técnicas avançadas de aprendizagem automática para identificar padrões e comprometer a privacidade dos utilizadores.
-
-Esta dissertação aborda estes desafios, reforçando as defesas da rede Tor contra os ataques supramencionados. O principal objetivo é desenvolver uma solução inovadora para melhorar os nós de retransmissão Tor (Relay Nodes), aproveitando a arquitetura de software existente e introduzindo garantias formais de privacidade baseadas em circuitos privados diferenciados. Pretende-se que a solução proposta preserve níveis práticos de throughput e latência para comunicações de ponta a ponta, garantindo a compatibilidade com cenários de utilização real e proporcionando aos utilizadores uma proteção do anonimato mais robusta e adaptável.
-
-Como referido anteriormente, o cerne da solução proposta assenta na integração dos princípios da Privacidade Diferencial, introduzindo dinamicamente ruído aleatório cuidadosamente delimitado nos fluxos de tráfego, mitigando os ataques de correlação e reforçando a resistência à recolha de impressões digitais. Tanto quanto é do nosso conhecimento, os contributos esperados desta dissertação poderão representar um avanço pioneiro na incorporação da Privacidade Diferencial na arquitetura de software dos nós de retransmissão Tor (Relay Nodes).
-Além disso, a aplicação da Privacidade Diferencial permitirá o desenvolvimento de um mecanismo formalmente comprovado, escalável e eficaz, que reforça o anonimato online e se mantém resiliente face às técnicas mais avançadas de censura na Internet, protegendo, assim, o direito fundamental à liberdade de expressão num mundo digital cada vez mais sujeito a monitorização.
+As contribuições desta dissertação representam um passo potencialmente significativo no sentido de incorporar a privacidade diferencial na arquitetura de software dos nós de reencaminhamento do Tor. Além disso, a abordagem proposta inspirada na privacidade diferencial fornece um mecanismo formalmente fundamentado, escalável e eficaz para reforçar o anonimato online, oferecendo maior resiliência contra as técnicas mais avançadas de censura e vigilância na Internet.
 
 \keywords{
     Redes de Anonimato
+    \and Rede Tor
     \and Privacidade Diferencial
-    \and Comunicação Preservadora de Privacidade
-    \and Ataques de Análise de Tráfego
-    \and Garantias Reforçadas de Privacidade Ponto a Ponto 
-    \and Correlação de Tráfego
+    \and Comunicação Preservadora de privacidade
+    \and Ataques de Analise de Trafico
+    \and Prevenção de \textit{Fingerprinting} de Tráfego
 }
 
